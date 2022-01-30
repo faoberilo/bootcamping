@@ -11,9 +11,8 @@ import Perfil from "./pages/Profile/Profile";
 import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import RegisterProduct from "./pages/RegisterProduct/RegisterProduct";
-import Footer from "./components/Footer/Footer";
 
-axios.defaults.baseURL = "https://gcommerce-backend.herokuapp.com/";
+axios.defaults.baseURL = "http://localhost:3001/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.interceptors.request.use((config) => {
   config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
