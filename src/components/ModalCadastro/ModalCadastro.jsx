@@ -23,17 +23,17 @@ const ModalCadastro = () => {
 
   const handleSubmit = async (evento) => {
     evento.preventDefault();
-    const name=evento.target.name.value;
+    const nome=evento.target.name.value;
     const email=evento.target.email.value;
-    const password=evento.target.password.value;
+    const senh=evento.target.password.value;
     const passwordConfirmation=evento.target.passwordConfirmation.value;
     const isAdmin=evento.target.isadmin.value;
 
  
     const user = {
-        name,
+        nome,
         email,
-        password,     
+        senha,     
     }
     axios.post('/usuario', user)
         .then((response)=>{
