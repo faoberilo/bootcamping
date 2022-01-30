@@ -33,9 +33,7 @@ const ModalCadastro = () => {
     const user = {
         name,
         email,
-        password,
-        passwordConfirmation,
-        isAdmin      
+        password,     
     }
     axios.post('/usuario', user)
         .then((response)=>{
