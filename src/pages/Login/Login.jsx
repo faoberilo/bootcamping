@@ -15,14 +15,21 @@ export default function Login(){
 
         const login = {
             email: email,
-            password: senha
+            senha: senha
         }
 
-        axios.post('auth/login',login)
+        axios.post('auth',login)
         .then(response=>{
-            const token = response.data.token;
+            const token = response.data.acessToken;
             localStorage.setItem('token',token);
+            localStorage.setItem('tipo',response.data.tipo);
+            localStorage.setItem('idUser',response.data.id);
+
+            
+
             console.log(token);
+            console.log(response.data.tipo);
+            console.log(response.data.id);
             alert('Usuário logado com sucesso!');
             navigate('/');
         })        

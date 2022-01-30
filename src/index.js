@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
-import Perfil from "./pages/Profile/Profile";
+import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import RegisterProduct from "./pages/RegisterProduct/RegisterProduct";
@@ -28,7 +28,7 @@ ReactDOM.render(
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Profile" element={<Perfil />} />
+        <Route path="/profile/" element={<Profile />} />
         <Route path="/About" element={<About />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/registerproduct" element={<RegisterProduct />} />

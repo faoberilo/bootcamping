@@ -25,7 +25,7 @@ const ModalCadastro = () => {
     evento.preventDefault();
     const nome=evento.target.name.value;
     const email=evento.target.email.value;
-    const senh=evento.target.password.value;
+    const senha=evento.target.password.value;
     const passwordConfirmation=evento.target.passwordConfirmation.value;
     const isAdmin=evento.target.isadmin.value;
 
@@ -33,13 +33,15 @@ const ModalCadastro = () => {
     const user = {
         nome,
         email,
-        senha,     
+        senha,
+        isAdmin
     }
     axios.post('/usuario', user)
         .then((response)=>{
             alert('Usuário cadastrado com sucesso!!!');            
         }).catch((response)=>{
-          alert('Dado já cadastrado no sistema. Por favor tente mudar algum campo');            
+          alert('Dado já cadastrado no sistema. Por favor tente mudar algum campo');
+          console.log(user);         
       });
 
     
@@ -99,8 +101,8 @@ const ModalCadastro = () => {
               <option value="" disabled selected hidden>
                 Selecione o tipo de usuário
               </option>
-              <option id="administrador" name="administrador" value="administrador">Administrador</option>
-              <option id="padrao" name="padrao" value="padrão">Padrão</option>
+              <option id="administrador" name="administrador" value="admin">Administrador</option>
+              <option id="padrao" name="padrao" value="user">Padrão</option>
             </select>
           </div>
           <div className="input_field">

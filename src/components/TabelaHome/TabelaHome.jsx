@@ -52,7 +52,8 @@ const TabelaHome = () => {
 
   const lowerBusca = busca.toLowerCase();
 
-  const produtosFiltrados =  produtos.filter((produto)=> produto.title.toLowerCase().includes(lowerBusca));
+  const produtosFiltrados =  produtos.filter((produto)=> produto.title.toLowerCase().includes(lowerBusca) || String(produto.id).includes(busca));
+
 
   return (
        
