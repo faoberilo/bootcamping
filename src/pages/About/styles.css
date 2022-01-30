@@ -1,0 +1,14 @@
+div .Cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 1rem;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+
