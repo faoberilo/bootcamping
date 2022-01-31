@@ -29,19 +29,35 @@ const ModalCadastroProduto = () => {
     const descricao=evento.target.descricao.value;
     const categoria=evento.target.categoria.value;
     const preco1=evento.target.preco1.value;
-    const passwordConfirmation=evento.target.passwordConfirmation.value;
- 
-    const user = {
+    const promocaodesconto=evento.target.promocaodesconto.value;
+    const precoliquido1=evento.target.precoliquido1.value;
+    const disponivel=evento.target.disponivel.value;
+
+    const produto = {
         codigo,
         nome,
         descricao,
         categoria,
         preco1,
-        passwordConfirmation      
+        promocaodesconto,
+        precoliquido1,
+        disponivel     
     }
-    axios.post('/user/create', user)
+
+    const produto1 = {
+      produto: nome,
+      nome,
+      descricao,
+      colecao: categoria,
+      grife: categoria,
+      disponivel
+    }
+    console.log(produto);
+    console.log(produto1);
+
+    axios.post('/produto', produto1)
         .then((response)=>{
-            alert('Usuário cadastrado com sucesso!!!');
+            alert('Produto cadastrado com sucesso!!!');
             navigate('/');
         });
 
@@ -52,7 +68,8 @@ const ModalCadastroProduto = () => {
     <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
       <Container>
         <Title><BiPlusCircle />Cadastro de Produto</Title>
-        <Form>
+        
+          <Form onSubmit={handleSubmit}>
           <div className="input_field">
             <input type="number" className="input" id="codigo" name="codigo" placeholder="Código" required></input>
           </div>
@@ -69,18 +86,19 @@ const ModalCadastroProduto = () => {
             <input type="number" className="input" id="preco1" name="preco1" placeholder="Preço Original"></input>
           </div>
           <div className="input_field">
-            <input type="number" className="input" placeholder="Porcetagem de desconto"></input>
+            <input type="number" className="input" id="promocaodesconto" name="promocaodesconto" placeholder="Porcetagem de desconto"></input>
           </div>
           <div className="input_field">
-            <input type="number" className="input" placeholder="Preço com desconto"></input>
+            <input type="number" className="input" id="precoliquido1" name="precoliquido1" placeholder="Preço com desconto"></input>
           </div>
           <div className="input_field">
-            <input type="boolean" className="input" placeholder="Disponivel em estoque"></input>
+            <input type="boolean" className="input" id="disponivel" name="disponivel" placeholder="Disponivel em estoque"></input>
           </div>
           <div className="input_field">
-            <button type="submit" onSubmit={handleSubmit}>Enviar</button>
+            <button type="submit" >Enviar</button>
           </div>
-        </Form>
+          </Form>
+        
       </Container>
     </Modal>
   );
