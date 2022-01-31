@@ -32,6 +32,6 @@ justify-content: center;
                 color:black;
                 background-color: rgb(205,147,62);
             } 
-      
+    }
     
 `;

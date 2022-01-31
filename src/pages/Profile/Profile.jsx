@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Container } from './styles';
 
 
@@ -17,7 +17,6 @@ export default function Profile(props){
         getUser();
     }, []);
 
-    const { id } = useParams();
 
     const getUser= async () => {
         await axios.get(`/usuario/${localStorage.getItem('idUser')}`).then((response)=>{
@@ -39,10 +38,11 @@ export default function Profile(props){
     return(
         <Container>            
             <div>
-                <h2><b>Nome:</b> {user.nome}</h2>
-                <h3><b>Email:</b> {user.email}</h3>
-                <div><button className="botao"  onClick={handleClick}>Sair</button></div>     
-            </div>
+                <h1><b>Nome:</b> {user.nome}</h1>
+                <h1><b>Email:</b> {user.email}</h1>
+                <button className="botao"  onClick={handleClick}>Sair</button>
+            </div>    
+           
         </Container>
            
     )
