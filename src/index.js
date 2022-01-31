@@ -11,6 +11,7 @@ import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import RegisterProduct from "./pages/RegisterProduct/RegisterProduct";
+import Produto from "./pages/Produto/Produto";
 
 axios.defaults.baseURL = "http://localhost:3001/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -32,6 +33,8 @@ ReactDOM.render(
         <Route path="/About" element={<About />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/registerproduct" element={<RegisterProduct />} />
+        <Route path="/produto/:id" element={<Produto/>}/>
+
       </Routes>
     </BrowserRouter>
     {/* <Footer /> */}

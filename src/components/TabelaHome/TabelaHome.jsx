@@ -10,7 +10,6 @@ import TableRow from "@mui/material/TableRow";
 import Detalhes from "../Detalhes/Detalhes";
 import { FaSearch } from 'react-icons/fa';
 import { Container } from "./styles";
-import ExportTable from "../ExportTable/ExportTable";
 
 
 
