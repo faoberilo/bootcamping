@@ -10,11 +10,14 @@ import TableRow from "@mui/material/TableRow";
 import { FaSearch } from "react-icons/fa";
 import { Container } from "./styles";
 import GroupButton from "../GroupButton/GroupButton";
+import ExportTable from "../ExportTable/ExportTable";
+import Detalhes from "../Detalhes/Detalhes";
 
 const columns = [
   { id: "id", label: "Id" },
   { id: "title", label: "Nome" },
-  { id: "detalhes", label: "Detalhes+", align: "center" },
+  { id: "detalhes", label: "Detalhes", align: "center" },
+  { id: "gerenciar", label: "Gerenciar", align: "center" },
 ];
 
 const TabelaAdmin = () => {
@@ -27,7 +30,8 @@ const TabelaAdmin = () => {
         .then((data) => data);
 
       for (let i = 0; i < result.length; i++) {
-        result[i].detalhes = <GroupButton id={result[i].id} />;
+        result[i].gerenciar = <GroupButton id={result[i].id} />;
+        result[i].detalhes= <Detalhes id={result[i].id}/>
       }
 
       setProdutos(result);
@@ -46,8 +50,8 @@ const TabelaAdmin = () => {
 
   const lowerBusca = busca.toLowerCase();
 
-  const produtosFiltrados = produtos.filter((produto) =>
-    produto.title.toLowerCase().includes(lowerBusca)
+  const produtosFiltrados =  produtos.filter((produto)=> 
+  produto.title.toLowerCase().includes(lowerBusca) || String(produto.id).includes(busca)
   );
 
   return (
@@ -57,17 +61,21 @@ const TabelaAdmin = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" colSpan={5}>
+              <Container>
                 <h2>Produtos</h2>
-                <Container>
+                <div>
                   <input
                     type="search"
                     placeholder="O que você procura? "
                     value={busca}
                     onChange={(ev) => setBusca(ev.target.value)}
                   />
-                  <button>
-                    <FaSearch />
-                  </button>
+                  <FaSearch />
+                  </div>
+                  
+
+                  <ExportTable/>
+
                 </Container>
               </TableCell>
             </TableRow>

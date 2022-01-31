@@ -4,7 +4,7 @@ export const Detalhe = styled.div`
 display: flex;
 justify-content: right;
 align-items: center;
-font-size:1rem;
+font-size:1.5rem;
 
             button,
             button:hover,

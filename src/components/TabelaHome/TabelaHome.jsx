@@ -76,8 +76,6 @@ const TabelaHome = () => {
                   /><FaSearch/>
                 </div>
 
-                <ExportTable/>
-
                 </Container>
                   
               </TableCell>

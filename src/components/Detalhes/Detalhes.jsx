@@ -6,14 +6,14 @@ import { BiPlusCircle } from "react-icons/bi";
 const Detalhes = (props) => {
   const navigate = useNavigate();
 
-  const deletaProduto = () => {
-    navigate(`/produto/delete/${props.id}`, { state: props.id });
+  const getProduto = () => {
+    navigate(`/produto/${props.id}`, { state: props.id });
   };
 
   return (
     <div>
       <Detalhe>
-        <button onClick={deletaProduto}>
+        <button onClick={getProduto}>
           <BiPlusCircle />
         </button>
       </Detalhe>

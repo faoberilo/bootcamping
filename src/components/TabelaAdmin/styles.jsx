@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+display:flex;
+justify-content: space-between;
+align-items:center;
+    div{
+        font-size: 1rem;
         input{
             margin-top:.5rem;
             color: black;
@@ -15,6 +20,8 @@ export const Container = styled.div`
         input::placeholder {
         color: black;
         }
+    }
+        
         button{
             font-size:1rem;
             color: black;
