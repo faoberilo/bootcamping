@@ -10,35 +10,36 @@ import TableRow from "@mui/material/TableRow";
 import Detalhes from "../Detalhes/Detalhes";
 import { FaSearch } from 'react-icons/fa';
 import { Container } from "./styles";
-
-
+import axios from 'axios';
 
 const columns = [
   { id: "id", label: "Id"},
-  { id: "title", label: "Nome"},
+  { id: "nome", label: "Nome"},
   { id: "detalhes", label:"Detalhes+", align:"center"}
   
 ];
-
-
 
 const TabelaHome = () => {
 
   const [produtos, setProdutos] = React.useState([]);
 
-  React.useEffect(()=>{
+  
     const getData= async ()=>{
-        let result = await fetch('https://jsonplaceholder.typicode.com/todos')
-        .then(response => response.json())
-        .then (data=>data)
-        for (let i=0;i<result.length;i++){
-          result[i].detalhes= <Detalhes id={result[i].id}/>
-        }
-        setProdutos(result);
-        
+        await axios.get('produto')
+        .then(response => {
+          setProdutos(response.data)
+        })                            
     }
-    getData();
-  }, []);
+
+    React.useEffect(()=>{
+      getData()
+    });
+
+    for (let i=0;i<produtos.length;i++){
+      produtos[i].detalhes= <Detalhes id={produtos[i].id}/>
+    } 
+
+    console.log(produtos);
 
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 50;
@@ -51,7 +52,7 @@ const TabelaHome = () => {
 
   const lowerBusca = busca.toLowerCase();
 
-  const produtosFiltrados =  produtos.filter((produto)=> produto.title.toLowerCase().includes(lowerBusca) || String(produto.id).includes(busca));
+  const produtosFiltrados =  produtos.filter((produto)=> produto.nome.toLowerCase().includes(lowerBusca) || String(produto.id).includes(busca));
 
 
   return (
