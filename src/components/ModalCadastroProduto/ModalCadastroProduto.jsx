@@ -24,38 +24,44 @@ const ModalCadastroProduto = () => {
 
   const handleSubmit = async (evento) => {
     evento.preventDefault();
-    const codigo=evento.target.codigo.value;
+    const codigo=parseInt(evento.target.codigo.value);
     const nome=evento.target.nome.value;
     const descricao=evento.target.descricao.value;
     const categoria=evento.target.categoria.value;
-    const preco1=evento.target.preco1.value;
-    const promocaodesconto=evento.target.promocaodesconto.value;
-    const precoliquido1=evento.target.precoliquido1.value;
-    const disponivel=evento.target.disponivel.value;
+    const preco1=parseFloat(evento.target.preco1.value);
+    const promocaodesconto=parseInt(evento.target.promocaodesconto.value);
+    const precoliquido1=parseInt(evento.target.precoliquido1.value);
+    const disponivel=parseInt(evento.target.disponivel.value);
 
     const produto = {
-        codigo,
-        nome,
-        descricao,
-        categoria,
-        preco1,
-        promocaodesconto,
-        precoliquido1,
-        disponivel     
-    }
-
-    const produto1 = {
-      produto: nome,
+      produto:nome,
       nome,
       descricao,
-      colecao: categoria,
+      colecao:categoria,
       grife: categoria,
       disponivel
     }
-    console.log(produto);
-    console.log(produto1);
 
-    axios.post('/produto', produto1)
+    const produtopreco = {
+      codigo,
+      produtoid:codigo,
+      preco1,
+      limitedesconto:promocaodesconto,
+      promocaodesconto,
+      precodesconto:precoliquido1*promocaodesconto/100,
+      precoliquido1
+    }
+    
+
+  
+    console.log(produto);
+
+    console.log(produtopreco);
+
+    
+    axios.post('/produtosprecos', produtopreco);   
+
+    axios.post('/produto', produto)
         .then((response)=>{
             alert('Produto cadastrado com sucesso!!!');
             navigate('/');
@@ -71,7 +77,7 @@ const ModalCadastroProduto = () => {
         
           <Form onSubmit={handleSubmit}>
           <div className="input_field">
-            <input type="number" className="input" id="codigo" name="codigo" placeholder="Código" required></input>
+            <input type="text" className="input" id="codigo" name="codigo" placeholder="Código" required></input>
           </div>
           <div className="input_field">
             <input type="text" className="input" id="nome" name="nome" placeholder="Nome" required></input>
@@ -83,16 +89,16 @@ const ModalCadastroProduto = () => {
             <input type="text" className="input" id="categoria" name="categoria" placeholder="Categoria"></input>
           </div>
           <div className="input_field">
-            <input type="number" className="input" id="preco1" name="preco1" placeholder="Preço Original"></input>
+            <input type="text" className="input" id="preco1" name="preco1" placeholder="Preço Original"></input>
           </div>
           <div className="input_field">
-            <input type="number" className="input" id="promocaodesconto" name="promocaodesconto" placeholder="Porcetagem de desconto"></input>
+            <input type="text" className="input" id="promocaodesconto" name="promocaodesconto" placeholder="Porcetagem de desconto"></input>
           </div>
           <div className="input_field">
-            <input type="number" className="input" id="precoliquido1" name="precoliquido1" placeholder="Preço com desconto"></input>
+            <input type="text" className="input" id="precoliquido1" name="precoliquido1" placeholder="Preço com desconto"></input>
           </div>
           <div className="input_field">
-            <input type="boolean" className="input" id="disponivel" name="disponivel" placeholder="Disponivel em estoque"></input>
+            <input type="text" className="input" id="disponivel" name="disponivel" placeholder="Disponivel em estoque"></input>
           </div>
           <div className="input_field">
             <button type="submit" >Enviar</button>

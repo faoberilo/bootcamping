@@ -42,4 +42,5 @@ export const Del = styled.div`
 export const GrupButtons = styled.div`
   display: flex;
   justify-content:center;
+  
 `;
