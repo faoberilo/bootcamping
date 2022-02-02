@@ -52,13 +52,6 @@ const ModalCadastroProduto = () => {
       precoliquido1
     }
     
-
-  
-    console.log(produto);
-
-    console.log(produtopreco);
-
-    
     axios.post('/produtosprecos', produtopreco);   
 
     axios.post('/produto', produto)
