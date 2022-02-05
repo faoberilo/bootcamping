@@ -11,33 +11,44 @@ import { FaSearch } from "react-icons/fa";
 import { Container } from "./styles";
 import GroupButton from "../GroupButton/GroupButton";
 import ExportTable from "../ExportTable/ExportTable";
-import Detalhes from "../Detalhes/Detalhes";
+
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   { id: "id", label: "Id" },
-  { id: "title", label: "Nome" },
-  { id: "detalhes", label: "Detalhes", align: "center" },
+  { id: "nome", label: "Nome" },
+  { id: "descricao", label: "Descrição" },
+  { id: "colecao", label: "Coleção" },
+  { id: "grife", label: "Grife" },
   { id: "gerenciar", label: "Gerenciar", align: "center" },
 ];
 
 const TabelaAdmin = () => {
+  const navigate = useNavigate();
+
   const [produtos, setProdutos] = React.useState([]);
 
+  const getData = async () => {
+    await axios
+      .get("produto")
+      .then((response) => {
+        const produto = response.data;
+        for (let i = 0; i < produto.length; i++) {
+          produto[i].gerenciar = <GroupButton id={produto[i].id} />;
+        }        
+        setProdutos(produto);
+      })
+      .catch((response) => {
+        navigate("/login");
+      });
+  };
+
   React.useEffect(() => {
-    const getData = async () => {
-      let result = await fetch("https://jsonplaceholder.typicode.com/todos")
-        .then((response) => response.json())
-        .then((data) => data);
-
-      for (let i = 0; i < result.length; i++) {
-        result[i].gerenciar = <GroupButton id={result[i].id} />;
-        result[i].detalhes= <Detalhes id={result[i].id}/>
-      }
-
-      setProdutos(result);
-    };
     getData();
-  }, []);
+  });
+
+  
 
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 50;
@@ -50,8 +61,10 @@ const TabelaAdmin = () => {
 
   const lowerBusca = busca.toLowerCase();
 
-  const produtosFiltrados =  produtos.filter((produto)=> 
-  produto.title.toLowerCase().includes(lowerBusca) || String(produto.id).includes(busca)
+  const produtosFiltrados = produtos.filter(
+    (produto) =>
+      produto.nome.toLowerCase().includes(lowerBusca) ||
+      produto.produto1.includes(lowerBusca)
   );
 
   return (
@@ -61,21 +74,18 @@ const TabelaAdmin = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" colSpan={5}>
-              <Container>
-                <h2>Produtos</h2>
-                <div>
-                  <input
-                    type="search"
-                    placeholder="O que você procura? "
-                    value={busca}
-                    onChange={(ev) => setBusca(ev.target.value)}
-                  />
-                  <FaSearch />
+                <Container>
+                  <h2>Produtos</h2>
+                  <div>
+                    <input
+                      type="search"
+                      placeholder="O que você procura? "
+                      value={busca}
+                      onChange={(ev) => setBusca(ev.target.value)}
+                    />
+                    <FaSearch />
                   </div>
-                  
-
-                  <ExportTable/>
-
+                  <ExportTable />
                 </Container>
               </TableCell>
             </TableRow>

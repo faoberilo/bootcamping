@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Container } from './styles';
+import TabelaUser from '../../components/TabelaUser/TabelaUser';
 
 
 
 export default function Profile(props){
 
     const navigate=useNavigate();
-
     
     const [user,setUser] = useState({});
 
@@ -17,33 +17,42 @@ export default function Profile(props){
         getUser();
     }, []);
 
-
     const getUser= async () => {
-        await axios.get(`/usuario/${localStorage.getItem('idUser')}`).then((response)=>{
+        await axios.get(`usuario/${localStorage.getItem('idUser' )}`).then((response)=>{
             const user = response.data;
             console.log(user)
             setUser(user);
         }).catch((response)=>{
+            alert()
             navigate('/login');
         });       
     }
 
+ 
+
     const handleClick = event =>{
         event.preventDefault();
         localStorage.removeItem('token');
+        localStorage.removeItem('idUser');
+        localStorage.removeItem('tipo');
         alert('Usuário deslogado com sucesso!');
-        navigate('/');
+        navigate('/login');
+        document.location.reload(true);
     }
     
     return(
+        <div>
         <Container>            
             <div>
-                <h1><b>Nome:</b> {user.nome}</h1>
-                <h1><b>Email:</b> {user.email}</h1>
+                <h2><b>Nome:</b> {user.nome}</h2>
+                <h2><b>Email:</b> {user.email}</h2>
                 <button className="botao"  onClick={handleClick}>Sair</button>
-            </div>    
+            </div>        
            
         </Container>
+        <TabelaUser/>
+        </div>
+           
            
     )
 }

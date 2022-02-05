@@ -1,14 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #000;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0;
-  padding: 0.5rem;
-  align-items: center;
-
-  button {
+display:flex;
+justify-content: center;
+    div{
+        display:flex;
+        align-items: center;
+        background-color:rgba(205, 147, 62,0.3);
+        margin-top:1rem;
+        border:none;
+        border-radius: 10px;
+        padding:0.5rem;
+        
+              
+    }
+    h2{
+        margin-right:1rem;
+    }
+    button {
     background: #9d9d9c;
     background-image: -webkit-linear-gradient(top, #9d9d9c, #9d9d9c);
     background-image: -moz-linear-gradient(top, #9d9d9c, #9d9d9c);
@@ -38,16 +47,5 @@ export const Container = styled.div`
     transform: scale(1.1);
     text-decoration: none;
   }
-  input[type="file"] {
-    display: none;
-  }
-  label {
-    font-size: 1rem;
-    border-style: none;
-    padding: 0.5rem 1.5rem;
-    border-radius: 1rem;
-    background-color: rgb(157, 157, 156);
-    width: fit-content;
-    cursor: pointer;
-  }
+    
 `;

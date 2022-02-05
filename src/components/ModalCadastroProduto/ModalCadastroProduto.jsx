@@ -5,8 +5,7 @@ import "react-responsive-modal/styles.css";
 import "./styles";
 import { Container, Form, Title } from "./styles";
 import { BiPlusCircle } from "react-icons/bi";
-import axios from 'axios';
-
+import axios from "axios";
 
 const ModalCadastroProduto = () => {
   const [open, setOpen] = useState(false);
@@ -24,80 +23,151 @@ const ModalCadastroProduto = () => {
 
   const handleSubmit = async (evento) => {
     evento.preventDefault();
-    const codigo=parseInt(evento.target.codigo.value);
-    const nome=evento.target.nome.value;
-    const descricao=evento.target.descricao.value;
-    const categoria=evento.target.categoria.value;
-    const preco1=parseFloat(evento.target.preco1.value);
-    const promocaodesconto=parseInt(evento.target.promocaodesconto.value);
-    const precoliquido1=parseInt(evento.target.precoliquido1.value);
-    const disponivel=parseInt(evento.target.disponivel.value);
+    const codigo = evento.target.codigo.value;
+    const nome = evento.target.nome.value;
+    const descricao = evento.target.descricao.value;
+    const colecao = evento.target.colecao.value;
+    const grife = evento.target.grife.value;
+    const preco1 = parseFloat(evento.target.preco1.value);
+    const promocaodesconto = parseInt(evento.target.promocaodesconto.value);
+    const precoliquido1 = parseFloat(evento.target.precoliquido1.value);
+    const limitedesconto = parseInt(evento.target.limitedesconto.value);
+    const disponivel = parseInt(evento.target.disponivel.value);
 
     const produto = {
-      produto:nome,
+      produto1: codigo,
       nome,
       descricao,
-      colecao:categoria,
-      grife: categoria,
-      disponivel
-    }
+      colecao,
+      grife,
+      disponivel,
+    };
 
     const produtopreco = {
-      codigo,
-      produtoid:codigo,
+      codigo: 13,
+      produtoid: codigo,
       preco1,
-      limitedesconto:promocaodesconto,
+      limitedesconto,
       promocaodesconto,
-      precodesconto:precoliquido1*promocaodesconto/100,
-      precoliquido1
-    }
-    
-    axios.post('/produtosprecos', produtopreco);   
+      precoliquido1,
+    };
 
-    axios.post('/produto', produto)
-        .then((response)=>{
-            alert('Produto cadastrado com sucesso!!!');
-            navigate('/');
-        });
+    axios.post("/produto", produto).then((response) => { 
+      alert("Produto cadastrado com sucesso!!!");
+    });
 
-    
-  }
+    setTimeout(()=>{
+      axios.post("/produtosprecos", produtopreco)
+      .then((response) => {
+        alert("Preço cadastrado com sucesso!!!")
+        navigate('/')})
+    },1000);
+
+  };
 
   return (
     <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
       <Container>
-        <Title><BiPlusCircle />Cadastro de Produto</Title>
-        
-          <Form onSubmit={handleSubmit}>
-          <div className="input_field">
-            <input type="text" className="input" id="codigo" name="codigo" placeholder="Código" required></input>
+        <div>
+         <h1></h1>     
+        <Title><BiPlusCircle/> Cadastro de Produto</Title>
+        <button onClick={FechaModal}>X</button>
+        </div>
+
+        <Form onSubmit={handleSubmit}>
+          <div>
+            <input
+              type="text"
+              id="codigo"
+              name="codigo"
+              placeholder="Código do Produto"
+              required
+            ></input>
           </div>
-          <div className="input_field">
-            <input type="text" className="input" id="nome" name="nome" placeholder="Nome" required></input>
+          <div>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Nome"
+              required
+            ></input>
           </div>
-          <div className="input_field">
-            <input type="text" className="input" id="descricao" name="descricao" placeholder="Descrição" required></input>
+          <div>
+            <input
+              type="text"
+              id="descricao"
+              name="descricao"
+              placeholder="Descrição"
+              required
+            ></input>
           </div>
-          <div className="input_field">
-            <input type="text" className="input" id="categoria" name="categoria" placeholder="Categoria"></input>
+          <div>
+            <input
+              type="text"
+              id="colecao"
+              name="colecao"
+              placeholder="Coleção"
+            ></input>
           </div>
-          <div className="input_field">
-            <input type="text" className="input" id="preco1" name="preco1" placeholder="Preço Original"></input>
+          <div>
+            <input
+              type="text"
+              id="grife"
+              name="grife"
+              placeholder="Grife"
+            ></input>
           </div>
-          <div className="input_field">
-            <input type="text" className="input" id="promocaodesconto" name="promocaodesconto" placeholder="Porcetagem de desconto"></input>
+          <div>
+            <input
+              type="text"
+              id="preco1"
+              name="preco1"
+              placeholder="Preço Original"
+            ></input>
           </div>
-          <div className="input_field">
-            <input type="text" className="input" id="precoliquido1" name="precoliquido1" placeholder="Preço com desconto"></input>
+          <div>
+            <input
+              type="text"
+              id="promocaodesconto"
+              name="promocaodesconto"
+              placeholder="Porcetagem da promoção"
+            ></input>
           </div>
-          <div className="input_field">
-            <input type="text" className="input" id="disponivel" name="disponivel" placeholder="Disponivel em estoque"></input>
+          <div>
+            <input
+              type="text"
+              id="precoliquido1"
+              name="precoliquido1"
+              placeholder="Preço com desconto"
+            ></input>
           </div>
-          <div className="input_field">
-            <button type="submit" >Enviar</button>
+          <div>
+            <input
+              type="text"
+              id="limitedesconto"
+              name="limitedesconto"
+              placeholder="Limite de porcetagem desconto"
+            ></input>
           </div>
-          </Form>
-        
+          <div>
+            <select id="disponivel" name="disponivel">
+              <option value="" disabled selected hidden>
+                Disponivel em estoque
+              </option>
+              <option id="sim" name="sim" value="1">
+                Sim
+              </option>
+              <option id="não" name="não" value="0">
+                Não
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <button type="submit">Enviar</button>
+          </div>
+        </Form>
       </Container>
     </Modal>
   );

@@ -4,6 +4,8 @@ export const Container = styled.div`
 display:flex;
 justify-content: space-between;
 align-items:center;
+width: 100%;
+background: ;
     div{
         font-size: 1rem;
         input{

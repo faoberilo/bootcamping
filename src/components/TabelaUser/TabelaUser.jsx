@@ -7,39 +7,44 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import Detalhes from "../Detalhes/Detalhes";
 import { FaSearch } from 'react-icons/fa';
 import { Container } from "./styles";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Ativo from "../Ativo/Ativo";
+
 
 const columns = [
   { id: "id", label: "Id"},
-  { id: "nome", label: "Nome"},
-  { id: "detalhes", label:"Detalhes+", align:"center"}
-  
+  { id: "email", label: "Email"},
+  { id: "isAdmin", label:"Tipo"},
+  { id: "ativo", label:"Ativo?", align:"center"}  
 ];
 
-const TabelaHome = () => {
+const TabelaUser = () => {
 
-  const [produtos, setProdutos] = React.useState([]);
+  const navigate=useNavigate();
 
-  
-    const getData= async ()=>{
-        await axios.get('produto')
-        .then(response => {
-          setProdutos(response.data)
-        })                            
-    }
+    
+    const [users,setUsers] = React.useState([]);
 
     React.useEffect(()=>{
-      getData()
-    });
+        getUsers();
+    }, []);
 
-    for (let i=0;i<produtos.length;i++){
-      produtos[i].detalhes= <Detalhes id={produtos[i].id}/>
-    } 
 
-    console.log(produtos);
+    const getUsers= async () => {
+        await axios.get("usuario").then((response)=>{
+          setUsers(response.data);
+        }).catch((response)=>{
+            navigate('/login');
+        });       
+    }
+
+    for (let i = 0; i < users.length; i++) {
+      users[i].ativo = <Ativo id={users[i].id} />;
+    }
+    
 
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 50;
@@ -52,7 +57,11 @@ const TabelaHome = () => {
 
   const lowerBusca = busca.toLowerCase();
 
-  const produtosFiltrados =  produtos.filter((produto)=> produto.nome.toLowerCase().includes(lowerBusca) || String(produto.id).includes(busca));
+  const usersFiltrados =  users.filter(
+    (user)=> 
+    user.email.toLowerCase().includes(lowerBusca) || 
+    String(user.id).includes(busca)
+    );
 
 
   return (
@@ -66,7 +75,7 @@ const TabelaHome = () => {
             <TableRow>
               <TableCell align="center" colSpan={50}>
               <Container>
-                <h2>Produtos</h2>                
+                <h2>Usuários</h2>                
                 <div>
                 <input
                   type='search' 
@@ -93,7 +102,7 @@ const TabelaHome = () => {
             </TableRow>
           </TableHead>
           <TableBody >
-            {produtosFiltrados
+            {usersFiltrados
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -118,7 +127,7 @@ const TabelaHome = () => {
       <TablePagination
         rowsPerPageOptions=""
         component="div"
-        count={produtos.length}
+        count={users.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
@@ -130,4 +139,4 @@ const TabelaHome = () => {
   );
 };
 
-export default TabelaHome;
+export default TabelaUser;

@@ -14,7 +14,7 @@ const ModalCadastro = () => {
   const AbreModal = () => setOpen(true);
   const FechaModal = () => {
     setOpen(false);
-    navigate("/");
+    navigate("/admin");
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const ModalCadastro = () => {
     const email=evento.target.email.value;
     const senha=evento.target.password.value;
     const passwordConfirmation=evento.target.passwordConfirmation.value;
-    const isAdmin=evento.target.isadmin.value;
+    const isAdmin=parseInt(evento.target.isadmin.value);
 
  
     const user = {
@@ -38,7 +38,8 @@ const ModalCadastro = () => {
     }
     axios.post('/usuario', user)
         .then((response)=>{
-            alert('Usuário cadastrado com sucesso!!!');            
+            alert('Usuário cadastrado com sucesso!!!');
+            navigate("/admin");
         }).catch((response)=>{
           alert('Dado já cadastrado no sistema. Por favor tente mudar algum campo');
           console.log(user);         
@@ -50,10 +51,11 @@ const ModalCadastro = () => {
   return (
     <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
       <Container>
-        <Title>
-          <BiUserPlus />
-          Cadastro
-        </Title>
+        <div>
+         <h1></h1>     
+        <Title><BiUserPlus/>Cadastro</Title>
+        <button onClick={FechaModal}>X</button>
+        </div>        
         <Form onSubmit={handleSubmit}>
           <div className="input_field">
             <input
@@ -101,8 +103,8 @@ const ModalCadastro = () => {
               <option value="" disabled selected hidden>
                 Selecione o tipo de usuário
               </option>
-              <option id="administrador" name="administrador" value="admin">Administrador</option>
-              <option id="padrao" name="padrao" value="user">Padrão</option>
+              <option id="administrador" name="administrador" value="2">Administrador</option>
+              <option id="padrao" name="padrao" value="1">Padrão</option>
             </select>
           </div>
           <div className="input_field">

@@ -5,8 +5,9 @@ import { Container } from "./styles";
 import { BiLogInCircle} from "react-icons/bi";
 
 export default function Login(){
-    const navigate=useNavigate();
     
+    const navigate=useNavigate();
+      
     const [email,setEmail] = useState('');
     const [senha,setSenha] = useState('');
 
@@ -23,9 +24,13 @@ export default function Login(){
         .then(response=>{
             localStorage.setItem('token',response.data.acessToken);
             localStorage.setItem('tipo',response.data.tipo);
-            localStorage.setItem('idUser',response.data.id);        
+            localStorage.setItem('idUser',response.data.idUser);
+            
             alert('Usuário logado com sucesso!');
-            navigate('/');
+            navigate('/admin');
+            document.location.reload(true);
+
+            
         })        
     }
 
