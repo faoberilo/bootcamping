@@ -23,12 +23,10 @@ export default function Profile(props){
             console.log(user)
             setUser(user);
         }).catch((response)=>{
-            alert()
             navigate('/login');
+            alert('Usuário não logado!!!');            
         });       
     }
-
- 
 
     const handleClick = event =>{
         event.preventDefault();
