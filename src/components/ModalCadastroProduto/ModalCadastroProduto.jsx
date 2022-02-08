@@ -165,6 +165,7 @@ const ModalCadastroProduto = () => {
               placeholder="Porcentagem da promoção"
               min="1" 
               max="99"
+              maxlength="2"
               required
             ></input>
           </div>

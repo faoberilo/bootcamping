@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "./styles";
+import axios from 'axios';
 
 class FileInput extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class FileInput extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    axios.post('massa', this.fileInput.current);
     alert(`Arquivo Selecionado - ${this.fileInput.current.files[0].name}`);
   }
 
@@ -18,7 +20,7 @@ class FileInput extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Upload
-            <input type="file" ref={this.fileInput} />
+            <input type="file" ref={this.fileInput} accept="application/xlxs" />
           </label>
          <button type="submit">Enviar</button>
          

@@ -24,14 +24,13 @@ export default function Login(){
         .then(response=>{
             localStorage.setItem('token',response.data.acessToken);
             localStorage.setItem('tipo',response.data.tipo);
-            localStorage.setItem('idUser',response.data.idUser);
-            
+            localStorage.setItem('idUser',response.data.idUser);            
             alert('Usuário logado com sucesso!');
             navigate('/admin');
-            document.location.reload(true);
-
-            
-        })        
+            document.location.reload(true);})
+        .catch(response=>{
+            alert("O email ou senha estão incorretos")
+        })
     }
 
 

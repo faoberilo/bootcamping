@@ -6,6 +6,8 @@ import "./styles";
 import { Container, Form, Title } from "./styles";
 import { BiEdit } from "react-icons/bi";
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
+
 
 
 const ModalEditarProduto = () => {
@@ -131,9 +133,9 @@ const ModalEditarProduto = () => {
           <Title>Edição de Produto</Title>
           <button onClick={FechaModal}>X</button>
         </div>    
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} >
           <div>
-            <input type="text"  id="codigo" name="produto1" placeholder="Código" onChange={handleFieldsChange} value={produto.produto1} required></input>
+            <TextField type="text"  id="codigo" name="produto1" label="Código"   onChange={handleFieldsChange} defaultValue={produto.produto1} value={produto.produto1} required></TextField>
           </div>
           <div>
             <input type="text"  id="nome" name="nome" placeholder="Nome" onChange={handleFieldsChange} value={produto.nome} required></input>
