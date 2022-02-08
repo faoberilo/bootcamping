@@ -6,6 +6,8 @@ import "./styles";
 import { Container, Form, Title } from "./styles";
 import { BiPlusCircle } from "react-icons/bi";
 import axios from "axios";
+import TextField from '@mui/material/TextField';
+
 
 const ModalCadastroProduto = () => {
   const [open, setOpen] = useState(false);
@@ -20,7 +22,7 @@ const ModalCadastroProduto = () => {
   useEffect(() => {
     AbreModal();
   }, []);
-
+ 
   const handleSubmit = async (evento) => {
     evento.preventDefault();
     const codigo = evento.target.codigo.value;
@@ -61,37 +63,61 @@ const ModalCadastroProduto = () => {
       .then((response) => {
         alert("Preço cadastrado com sucesso!!!")
         navigate('/')})
+      .catch((response)=>{
+        axios.delete(`/produto/${produto.id}`)
+        alert(response.message)
+      })
     },1000);
 
   };
+
+  const formatar = (evento)=> {
+     
+    var elemento = document.getElementById(evento.target.id);
+    var valor = elemento.value;
+
+    valor = valor + '';
+    valor = parseFloat(valor.replace(/[\D]+/g, ''));
+    valor = valor + '';
+    valor = valor.replace(/([0-9]{2})$/g, ".$1");
+
+    if (valor.length > 6) {
+        valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
+    }
+
+    elemento.value = valor;
+    if(valor === 'NaN') elemento.value = '';
+
+}
 
   return (
     <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
       <Container>
         <div>
-         <h1></h1>     
-        <Title><BiPlusCircle/> Cadastro de Produto</Title>
+        <Title><BiPlusCircle/></Title>   
+        <Title>Cadastro de Produto</Title>
         <button onClick={FechaModal}>X</button>
         </div>
 
         <Form onSubmit={handleSubmit}>
           <div>
-            <input
+            <TextField
               type="text"
               id="codigo"
               name="codigo"
-              placeholder="Código do Produto"
+              label="Código do Produto"
               required
-            ></input>
+            ></TextField>
           </div>
           <div>
+            <label><b>Nome: </b> 
             <input
               type="text"
               id="nome"
               name="nome"
               placeholder="Nome"
               required
-            ></input>
+            ></input></label>
           </div>
           <div>
             <input
@@ -108,6 +134,7 @@ const ModalCadastroProduto = () => {
               id="colecao"
               name="colecao"
               placeholder="Coleção"
+              required
             ></input>
           </div>
           <div>
@@ -116,6 +143,7 @@ const ModalCadastroProduto = () => {
               id="grife"
               name="grife"
               placeholder="Grife"
+              required
             ></input>
           </div>
           <div>
@@ -124,14 +152,20 @@ const ModalCadastroProduto = () => {
               id="preco1"
               name="preco1"
               placeholder="Preço Original"
+              onKeyUp={formatar}
+              maxlength="9"
+              required
             ></input>
           </div>
           <div>
             <input
-              type="text"
+              type="number"
               id="promocaodesconto"
               name="promocaodesconto"
-              placeholder="Porcetagem da promoção"
+              placeholder="Porcentagem da promoção"
+              min="1" 
+              max="99"
+              required
             ></input>
           </div>
           <div>
@@ -140,18 +174,24 @@ const ModalCadastroProduto = () => {
               id="precoliquido1"
               name="precoliquido1"
               placeholder="Preço com desconto"
+              onKeyUp={formatar}
+              maxlength="9"
+              required
             ></input>
           </div>
           <div>
             <input
-              type="text"
+              type="number"
               id="limitedesconto"
               name="limitedesconto"
               placeholder="Limite de porcetagem desconto"
+              min="1" 
+              max="99"
+              required
             ></input>
           </div>
           <div>
-            <select id="disponivel" name="disponivel">
+            <select id="disponivel" name="disponivel" required>
               <option value="" disabled selected hidden>
                 Disponivel em estoque
               </option>

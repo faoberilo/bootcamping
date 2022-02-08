@@ -11,12 +11,11 @@ import { FaSearch } from "react-icons/fa";
 import { Container } from "./styles";
 import GroupButton from "../GroupButton/GroupButton";
 import ExportTable from "../ExportTable/ExportTable";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const columns = [
-  { id: "id", label: "Id" },
+  { id: "produto1", label: "Código" },
   { id: "nome", label: "Nome" },
   { id: "descricao", label: "Descrição" },
   { id: "colecao", label: "Coleção" },
@@ -73,7 +72,7 @@ const TabelaAdmin = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={5}>
+              <TableCell align="center" colSpan={columns.length}>
                 <Container>
                   <h2>Produtos</h2>
                   <div>

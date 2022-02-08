@@ -6,7 +6,7 @@ export const StyledBurger = styled.div`
   position: fixed;
   top: 5px;
   right: 20px;
-  z-index: 20;
+  z-index: 40;
   display: none;
   color: #9c9a9a;
 
@@ -15,6 +15,7 @@ export const StyledBurger = styled.div`
     justify-content: space-around;
     flex-flow: column nowrap;
     color: white;
+    
   }
 
   div {
@@ -24,18 +25,23 @@ export const StyledBurger = styled.div`
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
+    position: relative;
+    
 
     &:nth-child(1) {
       transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
+      
     }
 
     &:nth-child(2) {
       transform: ${({ open }) => (open ? "translateX(100%)" : "translateX(0)")};
       opacity: ${({ open }) => (open ? 0 : 1)};
+      
     }
 
     &:nth-child(3) {
       transform: ${({ open }) => (open ? "rotate(-45deg)" : "rotate(0)")};
+      
     }
   }
 `;
@@ -46,6 +52,7 @@ export const Ul = styled.ul`
   flex-flow: row nowrap;
   align-items: center;
   background-color: black;
+  z-index: 20;
 
 
   span {

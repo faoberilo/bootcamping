@@ -25,6 +25,7 @@ export const Container = styled.div`
     border: solid #000 1px;
     text-decoration: none;
     margin-left: 10px;
+    cursor: pointer;
   }
 
   button:hover {

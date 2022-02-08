@@ -5,20 +5,28 @@ import Tooltip from '@mui/material/Tooltip';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable';
 import XLSX from 'xlsx';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
 const ExportTable = () => {
+  const navigate = useNavigate();
 
   const [produtos, setProdutos] = React.useState([]);
 
   React.useEffect(()=>{
-    const getData= async ()=>{
-        let result = await fetch('https://jsonplaceholder.typicode.com/todos')
-        .then(response => response.json())
-        .then (data=>data)
-        setProdutos(result);        
-    }
+    const getData = async () => {
+      await axios
+        .get("produto")
+        .then((response) => {;
+               
+          setProdutos(response.data);
+        })
+        .catch((response) => {
+          navigate("/login");
+        });
+    };
     getData();
   }, []);
 
@@ -36,19 +44,26 @@ const ExportTable = () => {
   }
 
   const columns = [
-    { title: "User Id", field: "userId", },
-    { title: "Id", field: "id", },
-    { title: "Title", field: "title",},    
-    { title: "Completed", field: "completed",}
-  ]
+    { field: "id", title: "ID" },
+    { field: "produto1", title: "Código" },
+    { field: "nome", title: "Nome" },
+    { field: "descricao", title: "Descrição" },
+    { field: "colecao", title: "Coleção" },
+    { field: "grife", title: "Grife" },
+    { field: "disponivel", title: "Disponivel?" },
+    { field: "created_at", title: "Criado em: " },
+    { field: "updated_at", title: "Última atualização: " },
+  ];
+
 
   const downloadPdf = () => {
-    const doc = new jsPDF()
+    const doc = new jsPDF('l', 'pt')
     doc.text("Logs de atualização de preços", 20, 10)
     doc.autoTable({
       theme: "grid",
       columns: columns.map(col => ({ ...col, dataKey: col.field })),
-      body: produtos
+      body: produtos,
+      margin: 40
     })
     doc.save('Logs.pdf')
   }

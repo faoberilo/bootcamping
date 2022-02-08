@@ -45,6 +45,7 @@ export const Form = styled.form`
   }
 
   div {
+    
     display: flex;
     justify-content: center;
     button{    

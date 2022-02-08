@@ -13,6 +13,7 @@ import { Style } from "./styles";
 import { Confirm } from "./styles";
 import { Detalhe } from "./styles";
 import { BiPlusCircle } from "react-icons/bi";
+import Tooltip from '@mui/material/Tooltip';
 
 const GroupButton = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -37,7 +38,7 @@ const GroupButton = (props) => {
       .then((response) => {
         alert("Produto deletado com sucesso!!!")
         handleClose()})
-    },100);
+    },1000);
 
   };
 
@@ -51,8 +52,7 @@ const GroupButton = (props) => {
               <Button
                 variant="contained"
                 color="success"
-                onClick={deletaProduto}
-              >
+                onClick={deletaProduto}>
                 Sim
               </Button>
               <Button variant="contained" color="error" onClick={handleClose}>
@@ -63,19 +63,24 @@ const GroupButton = (props) => {
         </Style>
       </Modal>
       <Detalhe>
+      <Tooltip title="Mais detalhes do produto">
         <button onClick={getProduto}>
           <BiPlusCircle />
-        </button>
+        </button></Tooltip>
       </Detalhe>
       <Edit>
+      <Tooltip title="Editar produto">
         <button onClick={editaProduto}>
           <BiEdit />
         </button>
+      </Tooltip>
       </Edit>
       <Del>
+      <Tooltip title="Excluir produto">
         <button onClick={handleOpen}>
           <BiTrash />
         </button>
+        </Tooltip>
       </Del>
     </GrupButtons>
   );

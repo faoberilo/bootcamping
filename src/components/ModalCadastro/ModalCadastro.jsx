@@ -52,8 +52,8 @@ const ModalCadastro = () => {
     <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
       <Container>
         <div>
-         <h1></h1>     
-        <Title><BiUserPlus/>Cadastro</Title>
+        <Title><BiUserPlus/></Title>
+        <Title>Cadastro</Title>
         <button onClick={FechaModal}>X</button>
         </div>        
         <Form onSubmit={handleSubmit}>

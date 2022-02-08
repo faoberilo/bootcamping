@@ -55,7 +55,26 @@ const ModalEditarProduto = () => {
         const campos = { ...preco}          
         campos[evento.target.name] = evento.target.value;    
         setPreco(campos);        
-      }  
+      }
+      
+      const formatar = (evento)=> {
+     
+        var elemento = document.getElementById(evento.target.id);
+        var valor = elemento.value;
+    
+        valor = valor + '';
+        valor = parseFloat(valor.replace(/[\D]+/g, ''));
+        valor = valor + '';
+        valor = valor.replace(/([0-9]{2})$/g, ".$1");
+    
+        if (valor.length > 6) {
+            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
+        }
+    
+        elemento.value = valor;
+        if(valor === 'NaN') elemento.value = '';
+    
+    }
  
 
   const handleSubmit = async (evento) => {
@@ -103,17 +122,16 @@ const ModalEditarProduto = () => {
     
     
   }
- <div>
-         <h1></h1>     
-        <Title><BiEdit/> Edição de Produto</Title>
-        <button onClick={FechaModal}>X</button>
-        </div>
+
   return (
     <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
       <Container>
-     
-        
-          <Form onSubmit={handleSubmit}>
+        <div>
+        <Title><BiEdit/></Title>
+          <Title>Edição de Produto</Title>
+          <button onClick={FechaModal}>X</button>
+        </div>    
+      <Form onSubmit={handleSubmit}>
           <div>
             <input type="text"  id="codigo" name="produto1" placeholder="Código" onChange={handleFieldsChange} value={produto.produto1} required></input>
           </div>
@@ -130,16 +148,48 @@ const ModalEditarProduto = () => {
             <input type="text"  id="grife" name="grife" placeholder="Grife" onChange={handleFieldsChange} value={produto.grife} required></input>
           </div>
           <div >
-            <input type="text"  id="preco1" name="preco1" placeholder="Preço Original" onChange={handleFieldsChange1} value={preco.preco1}></input>
+            <input 
+              type="text"  
+              id="preco1" 
+              name="preco1" 
+              placeholder="Preço Original" 
+              onChange={handleFieldsChange1}
+              onKeyUp={formatar}
+              maxlength="9" 
+              value={preco.preco1}></input>
           </div>
           <div >
-            <input type="text"  id="promocaodesconto" name="promocaodesconto" placeholder="Porcetagem de desconto"  onChange={handleFieldsChange1} value={preco.promocaodesconto}></input>
+            <input 
+              type="number"  
+              id="promocaodesconto" 
+              name="promocaodesconto" 
+              placeholder="Porcetagem de desconto"  
+              onChange={handleFieldsChange1} 
+              min="1" 
+              max="99"
+              value={preco.promocaodesconto}></input>
           </div>
           <div >
-            <input type="text"  id="precoliquido1" name="precoliquido1" placeholder="Preço com desconto"  onChange={handleFieldsChange1} value={preco.precoliquido1}></input>
+            <input 
+              type="text"  
+              id="precoliquido1" 
+              name="precoliquido1" 
+              placeholder="Preço com desconto"  
+              onChange={handleFieldsChange1}
+              onKeyUp={formatar}
+              maxlength="9"
+              value={preco.precoliquido1}></input>
           </div>
           <div >
-            <input type="text"  id="limitedesconto" name="limitedesconto" placeholder="Limite de desconto"  onChange={handleFieldsChange1} value={preco.limitedesconto}></input>
+            <input 
+              type="number"  
+              id="limitedesconto" 
+              name="limitedesconto" 
+              placeholder="Limite de desconto"  
+              onChange={handleFieldsChange1}
+              min="1" 
+              max="99" 
+              value={preco.limitedesconto}></input>
           </div>
           <div>
             <select id="disponivel" name="disponivel">
