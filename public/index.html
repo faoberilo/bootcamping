@@ -26,16 +26,31 @@
     -->
     <title>G-Commerce</title>
     <style>
-      * {
-        
+      * {        
         box-sizing: border-box;
         text-decoration: none;
       }
+        #spinner {
+            animation: is-rotating 1s infinite;
+            border: 6px solid #e5e5e5;
+            border-radius: 50%;
+            border-top-color: #cd933e;
+            height: 50px;
+            width: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        @keyframes is-rotating {
+          to {
+          transform: rotate(1turn);
+          }
+        }
     </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root"><div id="spinner"></div></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
