@@ -21,10 +21,10 @@ export default function Produto(props) {
   const getProdutoById = async () => {
     const request = await axios.get(`/produto/${id}`);
     var produto = request.data;
-    if(produto.disponivel===1){
-      produto.disponivel="Sim"
-    } else{
-      produto.disponivel="Não"
+    if (produto.disponivel === 1) {
+      produto.disponivel = "Sim";
+    } else {
+      produto.disponivel = "Não";
     }
     setProduto(produto);
   };
@@ -37,7 +37,7 @@ export default function Produto(props) {
 
   return (
     <Container>
-      <Card sx={{ maxWidth: 545 }}>
+      <Card sx={{ maxWidth: 745 }}>
         <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h4" component="div">
@@ -53,9 +53,7 @@ export default function Produto(props) {
                 <p> Porcentagem da promoção: {preco.promocaodesconto}%</p>
                 <p> Preço Com Desconto: R${preco.precoliquido1}</p>
                 <p> Limite de desconto: {preco.limitedesconto}%</p>
-                <p> Disponivel em estoque: {produto.disponivel}</p>      
-
-
+                <p> Disponivel em estoque: {produto.disponivel}</p>
               </Conteudo>
             </Typography>
           </CardContent>
