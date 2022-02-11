@@ -20,8 +20,8 @@ class FileInput extends React.Component {
             Upload
             <input type="file" ref={this.fileInput} />
           </label>
-         <button type="submit">Enviar</button>
-         
+
+          <button type="submit">Enviar</button>
         </form>
       </Container>
     );

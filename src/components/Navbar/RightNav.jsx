@@ -7,12 +7,11 @@ const handleClick = event =>{
   event.preventDefault();
   localStorage.removeItem('token');
   localStorage.removeItem('idUser');
-  localStorage.removeItem('tipo');
-  alert('Usuário deslogado com sucesso!');
-  document.location.reload('/login'); 
+  localStorage.removeItem('tipo');  
+  document.location.reload('/login');
 }
 
-const RightNav = ({ open }) => {
+const RightNav = ({ open }) => {  
 
   if (!localStorage.getItem('token')) {
 

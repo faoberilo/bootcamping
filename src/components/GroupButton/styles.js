@@ -48,6 +48,7 @@ export const Style = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  color: white;
   transform: translate(-50%, -50%);
   width: fit-content;
   background-color: rgba(0, 0, 0, 0.5);

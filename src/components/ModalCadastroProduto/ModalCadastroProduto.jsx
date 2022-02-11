@@ -1,28 +1,37 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-responsive-modal";
-import { useNavigate } from "react-router-dom";
 import "react-responsive-modal/styles.css";
 import "./styles";
 import { Container, Form, Title } from "./styles";
-import { BiPlusCircle } from "react-icons/bi";
 import axios from "axios";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import { Box } from "@mui/system";
+import { useLocation, useNavigate } from "react-router-dom";
 
-
-const ModalCadastroProduto = () => {
+const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   const AbreModal = () => setOpen(true);
-  const FechaModal = () => {
-    setOpen(false);
-    navigate("/admin");
-  };
 
   useEffect(() => {
     AbreModal();
   }, []);
- 
+
+  const [disp, setDisp] = React.useState("");
+  const handleChange = (event) => {
+    setDisp(event.target.value);
+  };
+  const navigate = useNavigate();
+  const location = useLocation();
+  let message = "";
+  if (location.state) {
+    message = location.state.message;
+  }
+
   const handleSubmit = async (evento) => {
     evento.preventDefault();
     const codigo = evento.target.codigo.value;
@@ -34,7 +43,7 @@ const ModalCadastroProduto = () => {
     const promocaodesconto = parseInt(evento.target.promocaodesconto.value);
     const precoliquido1 = parseFloat(evento.target.precoliquido1.value);
     const limitedesconto = parseInt(evento.target.limitedesconto.value);
-    const disponivel = parseInt(evento.target.disponivel.value);
+    const disponivel = parseInt(disp);
 
     const produto = {
       produto1: codigo,
@@ -54,50 +63,40 @@ const ModalCadastroProduto = () => {
       precoliquido1,
     };
 
-    axios.post("/produto", produto).then((response) => { 
-      alert("Produto cadastrado com sucesso!!!");
-    });
+    axios.post("/produto", produto).then((response) => {});
 
-    setTimeout(()=>{
-      axios.post("/produtosprecos", produtopreco)
-      .then((response) => {
-        alert("Preço cadastrado com sucesso!!!")
-        navigate('/')})
-      .catch((response)=>{
-        axios.delete(`/produto/${produto.id}`)
-        alert(response.message)
-      })
-    },1000);
-
+    setTimeout(() => {
+      axios
+        .post("/produtosprecos", produtopreco)
+        .then((response) => {
+          onClose();
+          navigate("/admin", {
+            state: {
+              message: "Produto cadastrado com sucesso!!!",
+              type: "success",
+            },
+          });
+          document.location.reload(true);
+        })
+        .catch((response) => {
+          axios.delete(`/produto/${produto.id}`);
+          alert(response.message);
+        });
+    }, 1000);
   };
 
-  const formatar = (evento)=> {
-     
-    var elemento = document.getElementById(evento.target.id);
-    var valor = elemento.value;
+  const inputLabelProps = {
+    style: { fontSize: 15 },
+  };
 
-    valor = valor + '';
-    valor = parseFloat(valor.replace(/[\D]+/g, ''));
-    valor = valor + '';
-    valor = valor.replace(/([0-9]{2})$/g, ".$1");
-
-    if (valor.length > 6) {
-        valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1.$2");
-    }
-
-    elemento.value = valor;
-    if(valor === 'NaN') elemento.value = '';
-
-}
+  const inputProps = {
+    step: 0.01,
+  };
 
   return (
-    <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
+    <Modal open={open} onClose={onClose} center showCloseIcon={true}>
       <Container>
-        <div>
-        <Title><BiPlusCircle/></Title>   
         <Title>Cadastro de Produto</Title>
-        <button onClick={FechaModal}>X</button>
-        </div>
 
         <Form onSubmit={handleSubmit}>
           <div>
@@ -106,103 +105,127 @@ const ModalCadastroProduto = () => {
               id="codigo"
               name="codigo"
               label="Código do Produto"
+              margin="normal"
+              InputLabelProps={inputLabelProps}
               required
             ></TextField>
           </div>
           <div>
-            <label><b>Nome: </b> 
-            <input
+            <TextField
               type="text"
               id="nome"
               name="nome"
-              placeholder="Nome"
+              label="Nome do Produto"
+              margin="normal"
+              InputLabelProps={inputLabelProps}
               required
-            ></input></label>
+            ></TextField>
           </div>
           <div>
-            <input
+            <TextField
               type="text"
               id="descricao"
               name="descricao"
-              placeholder="Descrição"
+              label="Descrição do Produto"
+              margin="normal"
+              InputLabelProps={inputLabelProps}
               required
-            ></input>
+            ></TextField>
           </div>
           <div>
-            <input
+            <TextField
               type="text"
               id="colecao"
               name="colecao"
-              placeholder="Coleção"
+              label="Coleção"
+              margin="normal"
+              InputLabelProps={inputLabelProps}
               required
-            ></input>
+            ></TextField>
           </div>
           <div>
-            <input
+            <TextField
               type="text"
               id="grife"
               name="grife"
-              placeholder="Grife"
+              label="Grife"
+              margin="normal"
+              InputLabelProps={inputLabelProps}
               required
-            ></input>
+            ></TextField>
           </div>
           <div>
-            <input
-              type="text"
-              id="preco1"
-              name="preco1"
-              placeholder="Preço Original"
-              onKeyUp={formatar}
-              maxlength="9"
-              required
-            ></input>
+            <div>
+              <TextField
+                type="number"
+                id="preco1"
+                name="preco1"
+                label="Preço Original"
+                margin="normal"
+                inputProps={inputProps}
+                InputLabelProps={inputLabelProps}
+                maxlength="9"
+                required
+              ></TextField>
+            </div>
+            <div>
+              <TextField
+                type="number"
+                id="promocaodesconto"
+                name="promocaodesconto"
+                label="Desconto(%)"
+                margin="normal"
+                InputLabelProps={inputLabelProps}
+                min="1"
+                max="99"
+                required
+              ></TextField>
+            </div>
           </div>
           <div>
-            <input
-              type="number"
-              id="promocaodesconto"
-              name="promocaodesconto"
-              placeholder="Porcentagem da promoção"
-              min="1" 
-              max="99"
-              maxlength="2"
-              required
-            ></input>
+            <div>
+              <TextField
+                type="number"
+                id="precoliquido1"
+                name="precoliquido1"
+                label="Preço com desconto"
+                margin="normal"
+                InputLabelProps={inputLabelProps}
+                inputProps={inputProps}
+                maxlength="9"
+                required
+              ></TextField>
+            </div>
+            <div>
+              <TextField
+                type="number"
+                id="limitedesconto"
+                name="limitedesconto"
+                label="Limite de Desconto(%)"
+                margin="normal"
+                InputLabelProps={inputLabelProps}
+                min="1"
+                max="99"
+                required
+              ></TextField>
+            </div>
           </div>
           <div>
-            <input
-              type="text"
-              id="precoliquido1"
-              name="precoliquido1"
-              placeholder="Preço com desconto"
-              onKeyUp={formatar}
-              maxlength="9"
-              required
-            ></input>
-          </div>
-          <div>
-            <input
-              type="number"
-              id="limitedesconto"
-              name="limitedesconto"
-              placeholder="Limite de porcetagem desconto"
-              min="1" 
-              max="99"
-              required
-            ></input>
-          </div>
-          <div>
-            <select id="disponivel" name="disponivel" required>
-              <option value="" disabled selected hidden>
-                Disponivel em estoque
-              </option>
-              <option id="sim" name="sim" value="1">
-                Sim
-              </option>
-              <option id="não" name="não" value="0">
-                Não
-              </option>
-            </select>
+            <FormControl fullWidth required>
+              <InputLabel id="disponivel">Disponivel</InputLabel>
+              <Select
+                labelId="disponivel"
+                id="disponivel"
+                value={disp}
+                label="Disponivel"
+                margin="normal"
+                onChange={handleChange}
+                InputLabelProps={inputLabelProps}
+              >
+                <MenuItem value={1}>Sim</MenuItem>
+                <MenuItem value={0}>Não</MenuItem>
+              </Select>
+            </FormControl>
           </div>
 
           <div>

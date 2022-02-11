@@ -1,12 +1,22 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Container } from "./styles";
 import { BiLogInCircle} from "react-icons/bi";
+import Message from '../../components/Message/Message';
+
 
 export default function Login(){
-    
+
     const navigate=useNavigate();
+    const location = useLocation();
+    let message ="";
+    let type ="";
+
+        if (location.state){
+            message = location.state.message
+            type = location.state.type
+    }
       
     const [email,setEmail] = useState('');
     const [senha,setSenha] = useState('');
@@ -18,32 +28,35 @@ export default function Login(){
             email: email,
             senha: senha
         }
-        console.log(login);
         
         axios.post('auth',login)
         .then(response=>{
             localStorage.setItem('token',response.data.acessToken);
             localStorage.setItem('tipo',response.data.tipo);
-            localStorage.setItem('idUser',response.data.idUser);            
-            alert('Usuário logado com sucesso!');
-            navigate('/admin');
-            document.location.reload(true);})
-        .catch(response=>{
-            alert("O email ou senha estão incorretos")
+            localStorage.setItem('idUser',response.data.idUser);          
+            navigate('/admin',{ state:{message:"Usuário logado com sucesso!", type:"success"}});          
+            document.location.reload(true);           
         })
+        .catch(response=>{
+            navigate('/login',{ state:{message:"Dados incorretos, por favor tente novamente", type:"error"}});
+            document.location.reload(true);           
+        })        
     }
 
 
     return(
         <Container>
+            
             <h1><BiLogInCircle/>Login</h1>
             <form className='formLogin' onSubmit={handleSubmit}>
                 <input type='email' placeholder='Email' required onChange={event=>setEmail(event.target.value)}/>
                 <input type='password' placeholder='Senha'required onChange={event=>setSenha(event.target.value)}/>
+                <a href="http://www.gogle.com"> Esqueceu sua senha?</a>
                 <div>
                     <button type="submit">Entrar</button>
                 </div>
             </form>
+            {message && <Message msg={message} type={type}/>}
             
         </Container>
     )

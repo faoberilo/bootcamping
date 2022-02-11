@@ -1,119 +1,164 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-responsive-modal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "react-responsive-modal/styles.css";
 import "./styles";
 import { Container, Form, Title } from "./styles";
 import { BiUserPlus } from "react-icons/bi";
-import axios from 'axios';
+import axios from "axios";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@material-ui/core";
+import Message from "../Message/Message";
 
-const ModalCadastro = () => {
+const ModalCadastro = ({ onClose = () => {}, Children }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const AbreModal = () => setOpen(true);
-  const FechaModal = () => {
-    setOpen(false);
-    navigate("/admin");
-  };
 
   useEffect(() => {
     AbreModal();
   }, []);
 
+  const location = useLocation();
+  let message = "";
+  if (location.state) {
+    message = location.state.message;
+  }
+
   const handleSubmit = async (evento) => {
     evento.preventDefault();
-    const nome=evento.target.name.value;
-    const email=evento.target.email.value;
-    const senha=evento.target.password.value;
-    const passwordConfirmation=evento.target.passwordConfirmation.value;
-    const isAdmin=parseInt(evento.target.isadmin.value);
+    const nome = evento.target.name.value;
+    const email = evento.target.email.value;
+    const senha = evento.target.password.value;
+    const passwordConfirmation = evento.target.passwordConfirmation.value;
+    const isAdmin = parseInt(disp);
 
- 
-    const user = {
+    if (senha === passwordConfirmation) {
+      const user = {
         nome,
         email,
         senha,
-        isAdmin
-    }
-    axios.post('/usuario', user)
-        .then((response)=>{
-            alert('Usuário cadastrado com sucesso!!!');
-            navigate("/admin");
-        }).catch((response)=>{
-          alert('Dado já cadastrado no sistema. Por favor tente mudar algum campo');
-          console.log(user);         
+        isAdmin,
+      };
+
+      axios
+        .post("/usuario", user)
+        .then((response) => {
+          navigate("/admin", {
+            state: { message: "Usuário cadastrado com sucesso!" },
+          });
+          document.location.reload(true);
+        })
+        .catch((response) => {
+          navigate("/admin", {
+            state: {
+              message:
+                "Dado já cadastrado no sistema. Por favor tente mudar algum campo",
+            },
+          });
+          document.location.reload(true);
+        });
+    } else {
+      navigate("/admin", {
+        state: {
+          message: "Senhas não conferem! Por favor tente novamente",
+          type: "error",
+        },
       });
+      document.location.reload(true);
+    }
+  };
 
-    
+  const [disp, setDisp] = React.useState("");
+  const handleChange = (event) => {
+    setDisp(event.target.value);
+  };
+
+  if (localStorage.getItem("tipo") === "2") {
+    return (
+      <Modal open={open} onClose={onClose} center showCloseIcon={true}>
+        <Container>
+          <Title>
+            <BiUserPlus />
+            Cadastro
+          </Title>
+
+          <Form onSubmit={handleSubmit}>
+            <div className="input_field">
+              <TextField
+                type="text"
+                id="name"
+                name="name"
+                label="Nome"
+                margin="normal"
+                required
+              ></TextField>
+            </div>
+            <div className="input_field">
+              <TextField
+                type="email"
+                id="email"
+                name="email"
+                label="Email"
+                margin="normal"
+                required
+              ></TextField>
+            </div>
+            <div>
+              <div className="input_field">
+                <TextField
+                  type="password"
+                  id="password"
+                  name="password"
+                  label="Senha"
+                  margin="normal"
+                  required
+                ></TextField>
+              </div>
+              <div>
+                <TextField
+                  type="password"
+                  id="passwordConfirmation"
+                  name="passwordConfirmation"
+                  label="Confirmação de Senha"
+                  margin="normal"
+                  required
+                ></TextField>
+              </div>
+            </div>
+
+            <FormControl fullWidth>
+              <InputLabel id="disponivel">Permissão</InputLabel>
+              <Select
+                labelId="disponivel"
+                id="disponivel"
+                label="Tipo"
+                margin="normal"
+                onChange={handleChange}
+                required
+              >
+                <MenuItem value={2}>Administrador</MenuItem>
+                <MenuItem value={1}>Padrão</MenuItem>
+              </Select>
+            </FormControl>
+
+            <div className="input_field">
+              <button type="submit">Enviar</button>
+            </div>
+          </Form>
+        </Container>
+      </Modal>
+    );
+  } else {
+    navigate("/admin");
+    return <div></div>;
   }
-
-  return (
-    <Modal open={open} onClose={FechaModal} center showCloseIcon={false}>
-      <Container>
-        <div>
-        <Title><BiUserPlus/></Title>
-        <Title>Cadastro</Title>
-        <button onClick={FechaModal}>X</button>
-        </div>        
-        <Form onSubmit={handleSubmit}>
-          <div className="input_field">
-            <input
-              type="text"
-              className="input"
-              placeholder="Nome"
-              id="name" 
-              name="name"
-              required
-            ></input>
-          </div>
-          <div className="input_field">
-            <input
-              type="email"
-              className="input"
-              placeholder="Email"
-              id="email" 
-              name="email"
-              required
-            ></input>
-          </div>
-          <div className="input_field">
-            <input
-              type="password"
-              className="input"
-              placeholder="Senha"
-              id="password" 
-              name="password"
-              required
-            ></input>
-          </div>
-          
-          <div className="input_field">
-            <input
-              type="password"
-              className="input"
-              placeholder="Confirmação de Senha"
-              id="passwordConfirmation" 
-              name="passwordConfirmation"
-            ></input>
-          </div>
-
-          <div className="input_field">
-            <select id="isadmin" name="isadmin">
-              <option value="" disabled selected hidden>
-                Selecione o tipo de usuário
-              </option>
-              <option id="administrador" name="administrador" value="2">Administrador</option>
-              <option id="padrao" name="padrao" value="1">Padrão</option>
-            </select>
-          </div>
-          <div className="input_field">
-            <button type="submit">Enviar</button>
-          </div>
-        </Form>
-      </Container>
-    </Modal>
-  );
 };
 
 export default ModalCadastro;

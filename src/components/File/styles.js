@@ -6,7 +6,6 @@ export const Container = styled.div`
     label {
       margin-right: 1rem;
     }
-    
   }
   label {
     background: #9d9d9c;

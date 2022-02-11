@@ -23,17 +23,16 @@ export default function Profile(props){
             console.log(user)
             setUser(user);
         }).catch((response)=>{
+            alert()
             navigate('/login');
-            alert('Usuário não logado!!!');            
         });       
-    }
+    } 
 
     const handleClick = event =>{
         event.preventDefault();
         localStorage.removeItem('token');
         localStorage.removeItem('idUser');
         localStorage.removeItem('tipo');
-        alert('Usuário deslogado com sucesso!');
         navigate('/login');
         document.location.reload(true);
     }

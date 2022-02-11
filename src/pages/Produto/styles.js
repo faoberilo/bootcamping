@@ -22,4 +22,5 @@ export const Container = styled.div`
 
 export const Conteudo = styled.div`
   display: flex;
+ 
 `;

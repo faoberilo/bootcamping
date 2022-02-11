@@ -26,7 +26,7 @@ const TabelaUser = () => {
   const navigate=useNavigate();
 
     
-    const [users,setUsers] = React.useState([]);
+    var [users,setUsers] = React.useState([]);
 
     React.useEffect(()=>{
         getUsers();
@@ -40,11 +40,20 @@ const TabelaUser = () => {
             navigate('/login');
         });       
     }
+    
+   
 
     for (let i = 0; i < users.length; i++) {
       users[i].ativo = <Ativo id={users[i].id} />;
+      console.log(users[i].isAdmin)
+      if (users[i].isAdmin===2){
+        users[i].isAdmin = "Admin";
+      } 
+      if (users[i].isAdmin===1){
+        users[i].isAdmin = "Padrão";
+      }
     }
-    
+   
 
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 50;

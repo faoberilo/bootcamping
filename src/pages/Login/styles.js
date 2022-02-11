@@ -37,6 +37,7 @@ export const Container = styled.div`
             border-radius: 1rem;
             background-color: rgb(157,157,156);
             width: fit-content;
+            margin-bottom:0.5rem;
             &:hover {
                 cursor: pointer;
                 transition: all 200ms ease;
@@ -46,6 +47,11 @@ export const Container = styled.div`
             }            
             }
 
+        }
+        a{
+            text-align: right;            
+            color:black;
+            font-style:border;
         }
         
         

@@ -67,11 +67,11 @@ const TabelaAdmin = () => {
   );
 
   return (
-    <Paper sx={{ width: "100%" }}>
+    <Paper sx={{ width: "100%" }} >
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow >
               <TableCell align="center" colSpan={columns.length}>
                 <Container>
                   <h2>Produtos</h2>
@@ -121,7 +121,7 @@ const TabelaAdmin = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions=""
+        rowsPerPageOptions={[]}
         component="div"
         count={produtos.length}
         rowsPerPage={rowsPerPage}

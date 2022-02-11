@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Edit } from "./styles";
 import { BiEdit } from "react-icons/bi";
 import { Del } from "./styles";
@@ -14,29 +14,36 @@ import { Confirm } from "./styles";
 import { Detalhe } from "./styles";
 import { BiPlusCircle } from "react-icons/bi";
 import Tooltip from '@mui/material/Tooltip';
+import ModalEditarProduto from "../ModalEditarProduto/ModalEditarProduto"
 
 const GroupButton = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [isModalVisible, setisModalVisible] = React.useState(false)
+
 
   const navigate = useNavigate();
+  const location = useLocation();
+    let message ="";
+    let type ="";
+        if (location.state){
+            message = location.state.message
+            type = location.state.type
+    }
 
   const getProduto = () => {
     navigate(`/produto/${props.id}`, { state: props.id });
   };
 
-  const editaProduto = () => {
-    navigate(`/produto/editar/${props.id}`, { state: props.id });
-  };
+
   const deletaProduto = () => {
-    axios.delete(`/produtosprecos/${props.id}`).then((response) => {
-      alert("Preço deletado com sucesso!!!");
-    });
+    axios.delete(`/produtosprecos/${props.id}`);
     setTimeout(()=>{
       axios.delete(`/produto/${props.id}`)
       .then((response) => {
-        alert("Produto deletado com sucesso!!!")
+        navigate('/admin',{ state:{message:"Produto deletado com sucesso!", type:"success"}});          
+        document.location.reload(true);
         handleClose()})
     },1000);
 
@@ -70,10 +77,10 @@ const GroupButton = (props) => {
       </Detalhe>
       <Edit>
       <Tooltip title="Editar produto">
-        <button onClick={editaProduto}>
-          <BiEdit />
-        </button>
-      </Tooltip>
+      <button type="button" onClick={() => setisModalVisible(true)}> <BiEdit/></button></Tooltip>
+          {isModalVisible ? (<ModalEditarProduto onClose={() => { setisModalVisible(false) }}/>): null}
+          {  localStorage.setItem("idEditar",props.id)}
+      
       </Edit>
       <Del>
       <Tooltip title="Excluir produto">

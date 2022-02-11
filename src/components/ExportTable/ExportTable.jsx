@@ -2,8 +2,6 @@ import React from 'react';
 import { Detalhe } from './styles';
 import { BiCloudDownload } from "react-icons/bi";
 import Tooltip from '@mui/material/Tooltip';
-import jsPDF from 'jspdf'
-import 'jspdf-autotable';
 import XLSX from 'xlsx';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -43,36 +41,11 @@ const ExportTable = () => {
     XLSX.writeFile(workBook,"Log.xlsx")
   }
 
-  const columns = [
-    { field: "id", title: "ID" },
-    { field: "produto1", title: "Código" },
-    { field: "nome", title: "Nome" },
-    { field: "descricao", title: "Descrição" },
-    { field: "colecao", title: "Coleção" },
-    { field: "grife", title: "Grife" },
-    { field: "disponivel", title: "Disponivel?" },
-    { field: "created_at", title: "Criado em: " },
-    { field: "updated_at", title: "Última atualização: " },
-  ];
-
-
-  const downloadPdf = () => {
-    const doc = new jsPDF('l', 'pt')
-    doc.text("Logs de atualização de preços", 20, 10)
-    doc.autoTable({
-      theme: "grid",
-      columns: columns.map(col => ({ ...col, dataKey: col.field })),
-      body: produtos,
-      margin: 40
-    })
-    doc.save('Logs.pdf')
-  }
   
   return (
     <div>
       <Detalhe>
       <Tooltip title="Download Tabela de Logs.xlsx"><button onClick={downloadExcel}><BiCloudDownload/></button></Tooltip>
-      <Tooltip title="Download Tabela de Logs.pdf"><button onClick={downloadPdf}><BiCloudDownload/></button></Tooltip>
       </Detalhe>      
     </div>             
   )
