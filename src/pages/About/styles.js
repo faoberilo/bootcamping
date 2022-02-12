@@ -8,10 +8,8 @@ export const Container = styled.div`
   }
   p {
     margin-top: 1rem;
-    margin-right: 4rem;
-    margin-left: 4rem;
-    justify-content: center;
-    align: justify;
+    margin-right: 2rem;
+    margin-left: 2rem;
   }
   h2 {
     margin-top: 1rem;
@@ -25,7 +23,6 @@ export const Cards = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 1rem;
-  margin-top: 3rem;
   align-items: center;
   .MuiTypography-h5 {
     text-align: center;
@@ -40,16 +37,17 @@ export const Cards = styled.div`
   }
 `;
 
-export const CardIcons = styled.div``;
-
-export const Tech = styled.div`
-  margin-top: 5rem;
+export const CardIcons = styled.div`
+  /* margin-left: 30%;
+  margin-right: 40%; */
 `;
+
+export const Tech = styled.div``;
 export const TechIcons = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 1rem;
+
   align-items: center;
 `;
 

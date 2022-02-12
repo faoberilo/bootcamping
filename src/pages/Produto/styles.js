@@ -18,9 +18,9 @@ export const Container = styled.div`
   h1 {
     margin-top: 1rem;
   }
- 
 `;
 
 export const Conteudo = styled.div`
   display: flex;
+ 
 `;
