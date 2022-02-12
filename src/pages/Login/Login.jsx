@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Container } from "./styles";
 import { BiLogInCircle} from "react-icons/bi";
 import Message from '../../components/Message/Message';
-import { TextField } from '@mui/material';
 
 
 export default function Login(){
@@ -43,34 +42,15 @@ export default function Login(){
             document.location.reload(true);           
         })        
     }
-    
+
 
     return(
         <Container>
             
             <h1><BiLogInCircle/>Login</h1>
             <form className='formLogin' onSubmit={handleSubmit}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email" 
-              onChange={event=>setEmail(event.target.value)}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Senha"
-              type="password"
-              id="password"
-              onChange={event=>setSenha(event.target.value)}
-              autoComplete="current-password"
-            />
+                <input type='email' placeholder='Email' required onChange={event=>setEmail(event.target.value)}/>
+                <input type='password' placeholder='Senha'required onChange={event=>setSenha(event.target.value)}/>
                 <a href="http://www.gogle.com"> Esqueceu sua senha?</a>
                 <div>
                     <button type="submit">Entrar</button>

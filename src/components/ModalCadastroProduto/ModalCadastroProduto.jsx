@@ -9,8 +9,8 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { Box } from "@mui/system";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BiPlusCircle } from "react-icons/bi";
 
 const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
   const [open, setOpen] = useState(false);
@@ -96,10 +96,7 @@ const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
   return (
     <Modal open={open} onClose={onClose} center showCloseIcon={true}>
       <Container>
-        <Title>
-          <BiPlusCircle />
-          Cadastro de Produto
-        </Title>
+        <Title>Cadastro de Produto</Title>
 
         <Form onSubmit={handleSubmit}>
           <div>
