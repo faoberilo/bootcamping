@@ -36,7 +36,7 @@ export default function Produto(props) {
   };
 
   return (
-    <Modal>
+    
       <Container>
         <Card sx={{ maxWidth: 745 }}>
           <CardActionArea>
@@ -61,6 +61,5 @@ export default function Produto(props) {
           </CardActionArea>
         </Card>
       </Container>
-    </Modal>
   );
 }
