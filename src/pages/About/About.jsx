@@ -1,14 +1,6 @@
 import { Container, Tech, TechIcons, Icons } from "./styles";
 import { IconContext } from "react-icons";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import {
-  SiNestjs,
-  SiPrisma,
-  SiReact,
-  SiPostgresql,
-  SiSwagger,
-} from "react-icons/si";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -20,6 +12,8 @@ import { Icon } from "@iconify/react";
 import fileTypeJsOfficial from "@iconify/icons-vscode-icons/file-type-js-official";
 
 const About = () => {
+
+ 
   return (
     <Container>
       <h1>Sobre o Projeto</h1>
