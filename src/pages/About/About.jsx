@@ -228,14 +228,14 @@ const About = () => {
         <h2>Tecnologias Utilizadas</h2>
         <TechIcons>
           <Icons>
-            <Tooltip title="Material Design">
+            <Tooltip title="Material Design" placement="right-start">
               <a href="https://mui.com/">
                 <Icon icon="simple-icons:mui" width="60" height="60" />
               </a>
             </Tooltip>
           </Icons>
           <Icons>
-            <Tooltip title="Javascript">
+            <Tooltip title="Javascript" placement="right-start">
               <a href="https://www.javascript.com/">
                 <Icon icon={fileTypeJsOfficial} width="60" />
               </a>
@@ -243,7 +243,7 @@ const About = () => {
           </Icons>
 
           <Icons>
-            <Tooltip title="React">
+            <Tooltip title="React" placement="right-start">
               <a href="https://reactjs.org/">
                 <Icon icon="logos:react" width="60" height="60" />
               </a>
@@ -251,7 +251,7 @@ const About = () => {
           </Icons>
 
           <Icons>
-            <Tooltip title="Prisma">
+            <Tooltip title="Prisma" placement="right-start">
               <a href="https://www.prisma.io/">
                 <Icon
                   icon="vscode-icons:file-type-light-prisma"
@@ -263,7 +263,7 @@ const About = () => {
           </Icons>
 
           <Icons>
-            <Tooltip title="NestJS">
+            <Tooltip title="NestJS" placement="right-start">
               <a href="https://nestjs.com/">
                 <Icon icon="logos:nestjs" width="60" height="60" />
               </a>
@@ -271,14 +271,14 @@ const About = () => {
           </Icons>
 
           <Icons>
-            <Tooltip title="PostgreSQL">
+            <Tooltip title="PostgreSQL" placement="right-start">
               <a href="https://www.postgresql.org/">
                 <Icon icon="logos:postgresql" width="60" height="60" />
               </a>
             </Tooltip>
           </Icons>
           <Icons>
-            <Tooltip title="Swagger">
+            <Tooltip title="Swagger" placement="right-start">
               <a href="https://swagger.io/">
                 <Icon icon="logos:swagger" width="60" />
               </a>
