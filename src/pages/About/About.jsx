@@ -1,7 +1,13 @@
 import { Container, Tech, TechIcons, Icons } from "./styles";
 import { IconContext } from "react-icons";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { SiNestjs, SiPrisma, SiReact, SiPostgresql } from "react-icons/si";
+import {
+  SiNestjs,
+  SiPrisma,
+  SiReact,
+  SiPostgresql,
+  SiSwagger,
+} from "react-icons/si";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,6 +15,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, CardActions } from "@mui/material";
 import { CardIcons, Cards } from "./styles";
+import Tooltip from "@mui/material/Tooltip";
+import { Icon } from "@iconify/react";
+import fileTypeJsOfficial from "@iconify/icons-vscode-icons/file-type-js-official";
 
 const About = () => {
   return (
@@ -30,8 +39,8 @@ const About = () => {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="140"
-                image="https://avatar.southparkstudios.com.br/wp-content/uploads/2022/01/4e38bc4f26cceb67d0a4cb96b0fe040e.png"
+                height="300"
+                image="https://avatars.githubusercontent.com/u/7354637?s=400&u=a130b60d999099fe833134e357fb1ffc24959826&v=4"
                 alt="foto de perfil"
               />
               <CardContent>
@@ -67,8 +76,8 @@ const About = () => {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="140"
-                image="https://avatar.southparkstudios.com.br/wp-content/uploads/2022/01/4e38bc4f26cceb67d0a4cb96b0fe040e.png"
+                height="300"
+                image="https://avatars.githubusercontent.com/u/89050385?v=4"
                 alt="foto de perfil"
               />
               <CardContent>
@@ -104,8 +113,8 @@ const About = () => {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="140"
-                image="https://avatar.southparkstudios.com.br/wp-content/uploads/2022/01/4e38bc4f26cceb67d0a4cb96b0fe040e.png"
+                height="300"
+                image="https://avatars.githubusercontent.com/u/89053801?v=4"
                 alt="foto de perfil"
               />
               <CardContent>
@@ -142,8 +151,8 @@ const About = () => {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="140"
-                image="https://avatar.southparkstudios.com.br/wp-content/uploads/2022/01/4e38bc4f26cceb67d0a4cb96b0fe040e.png"
+                height="300"
+                image="https://avatars.githubusercontent.com/u/83725112?v=4"
                 alt="foto de perfil"
               />
               <CardContent>
@@ -180,8 +189,8 @@ const About = () => {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="140"
-                image="https://avatar.southparkstudios.com.br/wp-content/uploads/2022/01/4e38bc4f26cceb67d0a4cb96b0fe040e.png"
+                height="300"
+                image="https://avatars.githubusercontent.com/u/79792101?v=4"
                 alt="foto de perfil"
               />
               <CardContent>
@@ -218,40 +227,63 @@ const About = () => {
       <Tech>
         <h2>Tecnologias Utilizadas</h2>
         <TechIcons>
-          <IconContext.Provider
-            value={{ style: { fontSize: "3rem", color: "#61DBFB" } }}
-          >
-            <Icons>
+          <Icons>
+            <Tooltip title="Material Design" placement="right-start">
+              <a href="https://mui.com/">
+                <Icon icon="simple-icons:mui" width="60" height="60" />
+              </a>
+            </Tooltip>
+          </Icons>
+          <Icons>
+            <Tooltip title="Javascript" placement="right-start">
+              <a href="https://www.javascript.com/">
+                <Icon icon={fileTypeJsOfficial} width="60" />
+              </a>
+            </Tooltip>
+          </Icons>
+
+          <Icons>
+            <Tooltip title="React" placement="right-start">
               <a href="https://reactjs.org/">
-                <SiReact />
+                <Icon icon="logos:react" width="60" height="60" />
               </a>
-            </Icons>
-          </IconContext.Provider>
-          <IconContext.Provider value={{ style: { fontSize: "3rem" } }}>
-            <Icons>
+            </Tooltip>
+          </Icons>
+
+          <Icons>
+            <Tooltip title="Prisma" placement="right-start">
               <a href="https://www.prisma.io/">
-                <SiPrisma />
+                <Icon
+                  icon="vscode-icons:file-type-light-prisma"
+                  width="60"
+                  height="60"
+                />
               </a>
-            </Icons>
-          </IconContext.Provider>
-          <IconContext.Provider
-            value={{ style: { fontSize: "3rem", color: "#EA2845" } }}
-          >
-            <Icons>
+            </Tooltip>
+          </Icons>
+
+          <Icons>
+            <Tooltip title="NestJS" placement="right-start">
               <a href="https://nestjs.com/">
-                <SiNestjs />
+                <Icon icon="logos:nestjs" width="60" height="60" />
               </a>
-            </Icons>
-          </IconContext.Provider>{" "}
-          <IconContext.Provider
-            value={{ style: { fontSize: "3rem", color: "#0064a5" } }}
-          >
-            <Icons>
+            </Tooltip>
+          </Icons>
+
+          <Icons>
+            <Tooltip title="PostgreSQL" placement="right-start">
               <a href="https://www.postgresql.org/">
-                <SiPostgresql />
+                <Icon icon="logos:postgresql" width="60" height="60" />
               </a>
-            </Icons>
-          </IconContext.Provider>
+            </Tooltip>
+          </Icons>
+          <Icons>
+            <Tooltip title="Swagger" placement="right-start">
+              <a href="https://swagger.io/">
+                <Icon icon="logos:swagger" width="60" />
+              </a>
+            </Tooltip>
+          </Icons>
         </TechIcons>
       </Tech>
     </Container>
