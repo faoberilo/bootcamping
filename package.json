@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.6.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@material-ui/core": "^5.0.0-beta.5",
+    "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.3.1",
     "@mui/x-data-grid": "^5.3.0",
     "@testing-library/jest-dom": "^5.16.1",
@@ -51,7 +52,8 @@
     ]
   },
   "devDependencies": {
-    "@iconify/icons-vscode-icons": "^1.1.12",
+    "@iconify/icons-grommet-icons": "^1.1.6",
+    "@iconify/icons-vscode-icons": "^1.1.11",
     "@iconify/react": "^3.1.3"
   }
 }

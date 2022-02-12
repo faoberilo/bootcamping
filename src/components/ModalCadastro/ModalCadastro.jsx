@@ -13,7 +13,7 @@ import {
   Select,
   TextField,
 } from "@material-ui/core";
-import Message from "../Message/Message";
+// import Message from "../Message/Message";
 
 const ModalCadastro = ({ onClose = () => {}, Children }) => {
   const [open, setOpen] = useState(false);
@@ -96,6 +96,7 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                 id="name"
                 name="name"
                 label="Nome"
+                color="primary"
                 margin="normal"
                 required
               ></TextField>
@@ -117,6 +118,7 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                   id="password"
                   name="password"
                   label="Senha"
+                  color="primary"
                   margin="normal"
                   required
                 ></TextField>
@@ -127,6 +129,7 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                   id="passwordConfirmation"
                   name="passwordConfirmation"
                   label="Confirmação de Senha"
+                  color="primary"
                   margin="normal"
                   required
                 ></TextField>
@@ -139,6 +142,7 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                 labelId="disponivel"
                 id="disponivel"
                 label="Tipo"
+                color="primary"
                 margin="normal"
                 onChange={handleChange}
                 required

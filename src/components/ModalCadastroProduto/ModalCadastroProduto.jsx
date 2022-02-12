@@ -11,6 +11,16 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BiPlusCircle } from "react-icons/bi";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#212121",
+      contrastText: "#fff",
+    },
+  },
+});
 
 const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
   const [open, setOpen] = useState(false);

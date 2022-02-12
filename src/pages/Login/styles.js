@@ -15,18 +15,22 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       input{
-          
+          border-style:solid;
+          border-color:black;          
           width: 30rem;
-          font-size: 1.3rem;
-          
-        }
-   
-       
+          font-size: 1.3rem;          
+        }       
         div{
             display: flex;
             justify-content: center;
             align-items: center;
-            button{ 
+        }
+        a{
+            text-align: right;            
+            color:black;
+            font-style:border;
+        }
+        button[type="submit"]{ 
             font-size: 1.5rem;
             border-style: none;
             padding: 0.5rem 1.5rem;
@@ -41,16 +45,6 @@ export const Container = styled.div`
                 color:black;
                 background-color: rgb(205,147,62);
             }            
-            }
+    }        
 
-        }
-        a{
-            text-align: right;            
-            color:black;
-            font-style:border;
-        }
-        
-        
-
-  }
 `;

@@ -13,6 +13,16 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useLocation, useNavigate } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#212121",
+      contrastText: "#fff",
+    },
+  },
+});
 
 const ModalEditarProduto = ({ onClose = () => {}, Children }) => {
   const [open, setOpen] = useState(false);
