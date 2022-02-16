@@ -43,6 +43,9 @@ export const Container = styled.div`
   input[type="file"] {
     display: none;
   }
+  input[type="submit"] {
+    display: none;
+  }
   label {
     font-size: 1rem;
     border-style: none;

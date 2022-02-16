@@ -38,7 +38,7 @@ const FileInput= () => {
   return (
     <Container>
     <form onSubmit={handleSubmit}>
-    <label>Selecionar arquivo... <input type="file" accept=".xlsx,.xls" onChange={handleFileSelect}/></label>
+    <label>Selecionar arquivo<input type="file" accept=".xlsx,.xls" onChange={handleFileSelect}/></label>
     <label>Enviar<input type="submit"></input></label>
     </form>
     </Container>
