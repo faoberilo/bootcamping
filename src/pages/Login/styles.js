@@ -17,6 +17,7 @@ export const Container = styled.div`
       input{
           border-style:solid;
           border-color:black;          
+   
           font-size: 1.3rem;          
         }       
         div{
