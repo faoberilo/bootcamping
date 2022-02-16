@@ -11,14 +11,15 @@ import { FaSearch } from 'react-icons/fa';
 import { Container } from "./styles";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Ativo from "../Ativo/Ativo";
+import GroupButtonUser from '../GroupButtonUser/GroupButtonUser';
 
 
 const columns = [
   { id: "id", label: "Id"},
+  { id: "nome", label: "Nome"},
   { id: "email", label: "Email"},
   { id: "isAdmin", label:"Tipo"},
-  { id: "ativo", label:"Ativo?", align:"center"}  
+  { id: "gerenciar", label:"Gerenciar", align:"center"}  
 ];
 
 const TabelaUser = () => {
@@ -44,7 +45,7 @@ const TabelaUser = () => {
    
 
     for (let i = 0; i < users.length; i++) {
-      users[i].ativo = <Ativo id={users[i].id} />;
+      users[i].gerenciar = <GroupButtonUser id={users[i].id} />;
       console.log(users[i].isAdmin)
       if (users[i].isAdmin===2){
         users[i].isAdmin = "Admin";
@@ -115,7 +116,7 @@ const TabelaUser = () => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow  hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow  key={row.id}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -134,7 +135,7 @@ const TabelaUser = () => {
       </TableContainer>
 
       <TablePagination
-        rowsPerPageOptions=""
+        rowsPerPageOptions={[]}
         component="div"
         count={users.length}
         rowsPerPage={rowsPerPage}

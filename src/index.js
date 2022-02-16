@@ -9,20 +9,9 @@ import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Produto from "./pages/Produto/Produto";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#212121",
-      contrastText: "#fff",
-    },
-  },
-});
-
-
-axios.defaults.baseURL = "https://gcommerce-backend.herokuapp.com/";
-// axios.defaults.baseURL = "http://localhost:3001/";
+// axios.defaults.baseURL = "https://gcommerce-backend.herokuapp.com/";
+axios.defaults.baseURL = "http://localhost:3001/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.interceptors.request.use((config) => {
   config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;

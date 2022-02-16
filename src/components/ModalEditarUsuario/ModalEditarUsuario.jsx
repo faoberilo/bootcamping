@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "react-responsive-modal/styles.css";
 import "./styles";
 import { Container, Form, Title } from "./styles";
-import { BiUserPlus } from "react-icons/bi";
+import { BiEdit } from "react-icons/bi";
 import axios from "axios";
 import {
   FormControl,
@@ -24,6 +24,9 @@ const theme = createTheme({
   },
 });
 const ModalCadastro = ({ onClose = () => {}, Children }) => {
+
+
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -39,15 +42,29 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
     message = location.state.message;
   }
 
+  const id = localStorage.getItem("idEditar");
+
+  const [user, setUser] = useState({});
+
+  const getUserById = async () => {
+    const request = await axios.get(`/usuario/${id}`);
+    const user = request.data
+     setUser(user);
+  };
+
+  useEffect(() => {
+    getUserById();
+  }, []);
+
+  console.log(user)
+
   const handleSubmit = async (evento) => {
     evento.preventDefault();
     const nome = evento.target.name.value;
     const email = evento.target.email.value;
     const senha = evento.target.password.value;
-    const passwordConfirmation = evento.target.passwordConfirmation.value;
     const isAdmin = parseInt(disp);
-
-    if (senha === passwordConfirmation) {
+    
       const user = {
         nome,
         email,
@@ -56,10 +73,10 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
       };
 
       axios
-        .post("/usuario", user)
+        .patch(`/usuario/${id}`, user)
         .then((response) => {
           navigate("/admin", {
-            state: { message: "Usuário cadastrado com sucesso!", type: "success",  },
+            state: { message: "Usuário editado com sucesso!", type: "success",  },
           });
           document.location.reload(true);
         })
@@ -67,21 +84,13 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
           navigate("/admin", {
             state: {
               message:
-                "Dado já cadastrado no sistema. Por favor tente mudar algum campo",
+                "Error",
                 type: "error",
             },
           });
           document.location.reload(true);
         });
-    } else {
-      navigate("/admin", {
-        state: {
-          message: "Senhas não conferem! Por favor tente novamente",
-          type: "error",
-        },
-      });
-      document.location.reload(true);
-    }
+    
   };
 
   const [disp, setDisp] = React.useState("");
@@ -94,8 +103,8 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
       <Modal open={open} onClose={onClose} center showCloseIcon={true}>
         <Container>
           <Title>
-            <BiUserPlus />
-            Cadastro
+            <BiEdit />
+            Editar Usuário
           </Title>
 
           <Form onSubmit={handleSubmit}>
@@ -107,6 +116,7 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                 name="name"
                 label="Nome"
                 margin="normal"
+                value={user.nome}
                 required
               ></TextField>
             </div>
@@ -117,33 +127,24 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                 name="email"
                 label="Email"
                 margin="normal"
+                value={user.email}
                 required
               ></TextField>
             </div>
-            <div>
+            
               <div >
                 <TextField
-                  type="password"
+                  type="text"
                   id="password"
                   name="password"
                   label="Senha"
                   color="primary"
                   margin="normal"
+                  value={user.senha}
                   required
                 ></TextField>
               </div>
-              <div>
-                <TextField
-                  type="password"
-                  id="passwordConfirmation"
-                  name="passwordConfirmation"
-                  label="Confirmação de Senha"
-                  color="primary"
-                  margin="normal"
-                  required
-                ></TextField>
-              </div>
-            </div>
+              
 
             <FormControl fullWidth>
               <InputLabel id="disponivel">Permissão</InputLabel>

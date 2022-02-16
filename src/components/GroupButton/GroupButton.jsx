@@ -13,40 +13,41 @@ import { Style } from "./styles";
 import { Confirm } from "./styles";
 import { Detalhe } from "./styles";
 import { BiPlusCircle } from "react-icons/bi";
-import Tooltip from '@mui/material/Tooltip';
-import ModalEditarProduto from "../ModalEditarProduto/ModalEditarProduto"
+import Tooltip from "@mui/material/Tooltip";
+import ModalEditarProduto from "../ModalEditarProduto/ModalEditarProduto";
+import ModalDetalhesProduto from "../Produto/ModalDetalhesProduto";
 
 const GroupButton = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [isModalVisible, setisModalVisible] = React.useState(false)
-
+  const [isModalVisible, setisModalVisible] = React.useState(false);
+  const [isModalDetalhesVisible, setisModalDetalhesVisible] = React.useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
-    let message ="";
-    let type ="";
-        if (location.state){
-            message = location.state.message
-            type = location.state.type
-    }
+  let message = "";
+  let type = "";
+  if (location.state) {
+    message = location.state.message;
+    type = location.state.type;
+  }
 
   const getProduto = () => {
     navigate(`/produto/${props.id}`, { state: props.id });
   };
 
-
   const deletaProduto = () => {
     axios.delete(`/produtosprecos/${props.id}`);
-    setTimeout(()=>{
-      axios.delete(`/produto/${props.id}`)
-      .then((response) => {
-        navigate('/admin',{ state:{message:"Produto deletado com sucesso!", type:"success"}});          
+    setTimeout(() => {
+      axios.delete(`/produto/${props.id}`).then((response) => {
+        navigate("/admin", {
+          state: { message: "Produto deletado com sucesso!", type: "success" },
+        });
         document.location.reload(true);
-        handleClose()})
-    },1000);
-
+        handleClose();
+      });
+    }, 1000);
   };
 
   return (
@@ -59,7 +60,8 @@ const GroupButton = (props) => {
               <Button
                 variant="contained"
                 color="success"
-                onClick={deletaProduto}>
+                onClick={deletaProduto}
+              >
                 Sim
               </Button>
               <Button variant="contained" color="error" onClick={handleClose}>
@@ -70,23 +72,45 @@ const GroupButton = (props) => {
         </Style>
       </Modal>
       <Detalhe>
-      <Tooltip title="Mais detalhes do produto">
-        <button onClick={getProduto}>
+        <Tooltip title="Mais detalhes do produto">
+          {/* <button onClick={getProduto}>
           <BiPlusCircle />
-        </button></Tooltip>
+        </button></Tooltip> */}
+          <button type="button" onClick={() => setisModalDetalhesVisible(true)}>
+            {" "}
+            <BiPlusCircle />
+          </button>
+        </Tooltip>
+        {isModalDetalhesVisible ? (
+          <ModalDetalhesProduto
+            onClose={() => {
+              setisModalDetalhesVisible(false);
+            }}
+          />
+        ) : null}
+        {localStorage.setItem("idEditar", props.id)}
       </Detalhe>
       <Edit>
-      <Tooltip title="Editar produto">
-      <button type="button" onClick={() => setisModalVisible(true)}> <BiEdit/></button></Tooltip>
-          {isModalVisible ? (<ModalEditarProduto onClose={() => { setisModalVisible(false) }}/>): null}
-          {  localStorage.setItem("idEditar",props.id)}
-      
+        <Tooltip title="Editar produto">
+          <button type="button" onClick={() => setisModalVisible(true)}>
+            {" "}
+            <BiEdit />
+          </button>
+        </Tooltip>
+        {isModalVisible ? (
+          <ModalEditarProduto
+            onClose={() => {
+              setisModalVisible(false);
+            }}
+          />
+        ) : null}
+        {localStorage.setItem("idEditar", props.id)}
       </Edit>
       <Del>
-      <Tooltip title="Excluir produto">
-        <button onClick={handleOpen}>
-          <BiTrash />
-        </button>
+        <Tooltip title="Excluir produto">
+          <button onClick={handleOpen}>
+            <BiTrash />
+          </button>
         </Tooltip>
       </Del>
     </GrupButtons>

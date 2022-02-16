@@ -40,7 +40,7 @@ const RightNav = ({ open }) => {
       return (
         <Ul open={open}>
           <li>
-            <a href="/admin">
+            <a href="/">
               <span>
                 <FiSettings />
                 Administrar

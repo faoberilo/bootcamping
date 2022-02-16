@@ -16,7 +16,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#212121",
+      main: "#000",
       contrastText: "#fff",
     },
   },
@@ -112,6 +112,7 @@ const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
         </Title>
 
         <Form onSubmit={handleSubmit}>
+        <ThemeProvider theme={theme}>
           <div>
             <TextField
               type="text"
@@ -244,6 +245,7 @@ const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
           <div>
             <button type="submit">Enviar</button>
           </div>
+          </ThemeProvider>
         </Form>
       </Container>
     </Modal>
