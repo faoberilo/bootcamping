@@ -37,6 +37,7 @@ export const Container = styled.div`
             border-radius: 1rem;
             background-color: rgb(157,157,156);
             width: fit-content;
+            margin-top:0.5rem;
             margin-bottom:0.5rem;
             &:hover {
                 cursor: pointer;
