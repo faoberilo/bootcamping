@@ -46,7 +46,6 @@ const TabelaUser = () => {
 
     for (let i = 0; i < users.length; i++) {
       users[i].gerenciar = <GroupButtonUser id={users[i].id} />;
-      console.log(users[i].isAdmin)
       if (users[i].isAdmin===2){
         users[i].isAdmin = "Admin";
       } 

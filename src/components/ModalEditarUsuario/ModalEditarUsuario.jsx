@@ -56,8 +56,6 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
     getUserById();
   }, []);
 
-  console.log(user)
-
   const handleSubmit = async (evento) => {
     evento.preventDefault();
     const nome = evento.target.name.value;
@@ -75,8 +73,8 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
       axios
         .patch(`/usuario/${id}`, user)
         .then((response) => {
-          navigate("/admin", {
-            state: { message: "Usuário editado com sucesso!", type: "success",  },
+          navigate("/profile", {
+            state: { message: "Usuário editado! Lembre-se desses dados para evitar o bloqueio da conta", type: "success",  },
           });
           document.location.reload(true);
         })
@@ -98,6 +96,12 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
     setDisp(event.target.value);
   };
 
+  const handleFieldsChange = (evento) => {
+    const campos = { ...user };
+    campos[evento.target.name] = evento.target.value;
+    setUser(campos);
+  };
+
   if (localStorage.getItem("tipo") === "2") {
     return (
       <Modal open={open} onClose={onClose} center showCloseIcon={true}>
@@ -113,10 +117,12 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
               <TextField
                 type="text"
                 id="name"
-                name="name"
+                name="nome"
                 label="Nome"
                 margin="normal"
                 value={user.nome}
+                defaultValue={user.nome}
+                onChange={handleFieldsChange}
                 required
               ></TextField>
             </div>
@@ -128,6 +134,8 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                 label="Email"
                 margin="normal"
                 value={user.email}
+                defaultValue={user.email}
+                onChange={handleFieldsChange}
                 required
               ></TextField>
             </div>
@@ -136,11 +144,13 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
                 <TextField
                   type="text"
                   id="password"
-                  name="password"
+                  name="senha"
                   label="Senha"
                   color="primary"
                   margin="normal"
                   value={user.senha}
+                  defaultValue={user.senha}
+                  onChange={handleFieldsChange}
                   required
                 ></TextField>
               </div>

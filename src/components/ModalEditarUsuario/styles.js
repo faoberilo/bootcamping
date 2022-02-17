@@ -22,6 +22,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
   display: flex;
   text-align: center;

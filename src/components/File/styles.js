@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  display:flex;
+  color:#fff;
+  align-items: center;
   form {
     display: flex;
     label {
@@ -20,7 +23,7 @@ export const Container = styled.div`
     font-family: Arial;
     color: #000;
     font-size: 13px;
-    padding: 10px 20px 10px 20px;
+    padding: 0.2rem;
     border: solid #000 1px;
     text-decoration: none;
   }

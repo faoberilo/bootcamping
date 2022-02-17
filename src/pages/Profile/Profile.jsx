@@ -14,7 +14,7 @@ export default function Profile(props){
 
     useEffect(()=>{
         getUser();
-    }, []);
+    }, {});
 
     const getUser= async () => {
         await axios.get(`usuario/${localStorage.getItem('idUser' )}`).then((response)=>{

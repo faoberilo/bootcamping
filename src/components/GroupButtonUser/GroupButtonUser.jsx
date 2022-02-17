@@ -60,6 +60,14 @@ const GroupButton = (props) => {
           </Box>
         </Style>
       </Modal>
+      
+      <Edit>
+      <Tooltip title="Editar usuário">
+      <button type="button" onClick={() => setisModalVisible(true)}> <BiEdit/></button></Tooltip>
+          {isModalVisible ? (<ModalEditarUsuario onClose={() => { setisModalVisible(false) }}/>): null}
+          {  localStorage.setItem("idEditar",props.id)}
+      
+      </Edit>
       <Del>
       <Tooltip title="Excluir usuário">
         <button onClick={handleOpen}>

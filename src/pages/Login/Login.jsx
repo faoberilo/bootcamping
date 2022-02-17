@@ -47,7 +47,6 @@ export default function Login() {
       senha: senha,
     };
     
-    console.log(senha);
     axios
       .post("auth", login)
       .then((response) => {
