@@ -89,7 +89,6 @@ const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
           document.location.reload(true);
         })
         .catch((response) => {
-          axios.delete(`/produto/${produto.id}`);
           alert(response.message);
         });
     }, 1000);

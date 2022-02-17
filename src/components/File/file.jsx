@@ -9,8 +9,10 @@ const FileInput= () => {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = React.useState();
 
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    navigate("/admin",{state: { spinner: "on" }});
     const formData = new FormData();
     formData.append("upload", selectedFile);
     try {
@@ -20,10 +22,10 @@ const FileInput= () => {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        navigate("/admin", {
-          state: { message: "Produtos atualizados com sucesso!", type: "success",  },
-        });
         document.location.reload(true);
+        navigate("/admin", {
+          state: { message: "Produtos atualizados com sucesso!", type: "success", spinner: "off"   },
+        });
       });     
 
     } catch(error) {
@@ -33,28 +35,28 @@ const FileInput= () => {
 
   const handleSubmit1 = async (event) => {
     event.preventDefault();
+    navigate('/admin', {state: { spinner: "on" }});
     const formData = new FormData();
     formData.append("upload", selectedFile);
     try {
-      document.getElementById('spinner').style.display = 'block';
-      await axios({
+        await axios({
         method: "post",
         url: "/produtosprecos/upload",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
-        navigate("/admin", {
-          state: { message: "Preços atualizados com sucesso!", type: "success",  },
-        });
         document.location.reload(true);
-      });     
+        navigate("/admin", {
+          state: { message: "Preços atualizados com sucesso!", type: "success", spinner: "off"},
+        });
+      }) 
 
     } catch(error) {
-      console.log(error).finally(() => {
-        document.getElementById('spinner').style.display = 'none';
-    });
+      console.log(error)
     }
   }
+
+  
 
 
   const handleFileSelect = (event) => {
