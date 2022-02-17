@@ -33,7 +33,7 @@ const About = () => {
               <CardMedia
                 component="img"
                 height="300"
-                image="https://avatars.githubusercontent.com/u/7354637?s=400&u=a130b60d999099fe833134e357fb1ffc24959826&v=4"
+                image="https://avatars.githubusercontent.com/u/7354637?s=400&u=b240202a4b3781bbffa14a05f81352b992179150&v=4"
                 alt="foto de perfil"
               />
               <CardContent>
@@ -50,14 +50,14 @@ const About = () => {
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#0e76a8" } }}
                 >
-                  <a href="http://www.linkedin.com">
+                  <a href="https://www.linkedin.com/in/bruno-daniel/">
                     <FaLinkedin />
                   </a>
                 </IconContext.Provider>
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#171515" } }}
                 >
-                  <a href="http://www.github.com">
+                  <a href="https://github.com/brunodaniel">
                     <FaGithub />
                   </a>
                 </IconContext.Provider>
@@ -87,14 +87,14 @@ const About = () => {
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#0e76a8" } }}
                 >
-                  <a href="http://www.linkedin.com">
+                  <a href="https://www.linkedin.com/in/faoberilo/">
                     <FaLinkedin />
                   </a>
                 </IconContext.Provider>
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#171515" } }}
                 >
-                  <a href="http://www.github.com">
+                  <a href="https://github.com/faoberilo">
                     <FaGithub />
                   </a>
                 </IconContext.Provider>
@@ -112,7 +112,7 @@ const About = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Felipe Amaral Oliveira
+                  Felipe Pereira de Pádua
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   BackEnd Developer
@@ -124,14 +124,14 @@ const About = () => {
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#0e76a8" } }}
                 >
-                  <a href="http://www.linkedin.com">
+                  <a href="https://www.linkedin.com/in/felipe-pereira-de-padua-a2a005221/">
                     <FaLinkedin />
                   </a>
                 </IconContext.Provider>
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#171515" } }}
                 >
-                  <a href="http://www.github.com">
+                  <a href="https://github.com/felipepadua011">
                     <FaGithub />
                   </a>
                 </IconContext.Provider>
@@ -162,14 +162,14 @@ const About = () => {
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#0e76a8" } }}
                 >
-                  <a href="http://www.linkedin.com">
+                  <a href="https://www.linkedin.com/in/carlos-eduardo-lima-galv%C3%A3o-a92707174/">
                     <FaLinkedin />
                   </a>
                 </IconContext.Provider>
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#171515" } }}
                 >
-                  <a href="http://www.github.com">
+                  <a href="https://github.com/cegalvao92">
                     <FaGithub />
                   </a>
                 </IconContext.Provider>
@@ -200,14 +200,14 @@ const About = () => {
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#0e76a8" } }}
                 >
-                  <a href="http://www.linkedin.com">
+                  <a href="https://www.linkedin.com/in/hudson-pereira/">
                     <FaLinkedin />
                   </a>
                 </IconContext.Provider>
                 <IconContext.Provider
                   value={{ style: { fontSize: "2rem", color: "#171515" } }}
                 >
-                  <a href="http://www.github.com">
+                  <a href="https://github.com/Hudson-Pereira">
                     <FaGithub />
                   </a>
                 </IconContext.Provider>
