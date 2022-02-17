@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 const FileInput= () => {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = React.useState();
@@ -66,20 +67,27 @@ const FileInput= () => {
   return (
     <Container>
     <p>Atualização em massa ┤</p>
+    
     <div>
-    <p> Produtos→</p>
-    <p> Preços--→</p>
-    </div>
     <div>
+    
     <form onSubmit={handleSubmit}>
-    <label>Selecionar...<input type="file" accept=".xlsx,.xls" onChange={handleFileSelect}/></label>
-    <label>Enviar<input type="submit"></input></label>
-    </form>
-    <form onSubmit={handleSubmit1}>
-    <label>Selecionar...<input type="file" accept=".xlsx,.xls" onChange={handleFileSelect}/></label>
+    <p> Produtos</p>
+    <label>Selecionar...<input type="file" onChange={handleFileSelect}/></label>
     <label>Enviar<input type="submit"></input></label>
     </form>
     </div>
+
+    <div>
+    
+    <form onSubmit={handleSubmit1}>
+    <p> Preços...</p>
+    <label>Selecionar...<input type="file" onChange={handleFileSelect}/></label>
+    <label>Enviar<input type="submit"></input></label>
+    </form>
+    </div>
+    </div>
+
     </Container>
   )
 };

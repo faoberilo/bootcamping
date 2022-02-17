@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import { Container, Conteudo } from "./styles";
 import Typography from "@mui/material/Typography";
