@@ -145,7 +145,7 @@ const About = () => {
               <CardMedia
                 component="img"
                 height="300"
-                image="https://avatars.githubusercontent.com/u/83725112?v=4"
+                image="https://media-exp1.licdn.com/dms/image/D4D35AQHWmqiK6yJSdQ/profile-framedphoto-shrink_200_200/0/1631811006303?e=1645228800&v=beta&t=UsUZBo1VxvDE55-oTsEAG7CquIjqB88a7xDPexMyKoM"
                 alt="foto de perfil"
               />
               <CardContent>
