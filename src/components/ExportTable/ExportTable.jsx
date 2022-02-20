@@ -16,9 +16,8 @@ const ExportTable = () => {
   React.useEffect(()=>{
     const getData = async () => {
       await axios
-        .get("produto")
-        .then((response) => {;
-               
+        .get("log")
+        .then((response) => {;               
           setProdutos(response.data);
         })
         .catch((response) => {
@@ -29,6 +28,7 @@ const ExportTable = () => {
   }, []);
 
   const downloadExcel=()=>{
+    navigate("/admin",{state: { spinner: "on" }});
     const newData=produtos.map(row=>{
       delete row.tableData
       return row
@@ -39,6 +39,8 @@ const ExportTable = () => {
     let buf=XLSX.write(workBook,{bookType:"xlsx",type:"buffer"})
     XLSX.write(workBook,{bookType:"xlsx",type:"binary"})
     XLSX.writeFile(workBook,"Log.xlsx")
+    navigate("/admin",{state: { spinner: "off" }});
+
   }
 
   

@@ -34,7 +34,10 @@ const ModalEditarProduto = ({ onClose = () => {}, Children }) => {
   }, []);
 
   const [produto, setProduto] = useState({});
+  const [produtoOriginal, setProdutoOriginal] = useState({});
   const [preco, setPreco] = useState({});
+  const [precoOriginal, setPrecoOriginal] = useState({});
+
 
   useEffect(() => {
     getProdutoById();
@@ -44,18 +47,20 @@ const ModalEditarProduto = ({ onClose = () => {}, Children }) => {
     getPrecoById();
   }, []);
 
-  const id = localStorage.getItem("idEditar");
+  const id = parseInt(localStorage.getItem("idEditar"));
 
   const getProdutoById = async () => {
     const request = await axios.get(`/produto/${id}`);
     const produto = request.data;
     setProduto(produto);
+    setProdutoOriginal(produto);
   };
 
   const getPrecoById = async () => {
     const request = await axios.get(`/produtosprecos/${id}`);
     const preco = request.data;
     setPreco(preco);
+    setPrecoOriginal(preco);
   };
   const handleFieldsChange = (evento) => {
     const campos = { ...produto };
@@ -97,7 +102,7 @@ const ModalEditarProduto = ({ onClose = () => {}, Children }) => {
       disponivel,
     };
 
-    const produtopreco = {
+    const preco = {
       codigo: 13,
       produtoid: codigo,
       preco1,
@@ -105,10 +110,11 @@ const ModalEditarProduto = ({ onClose = () => {}, Children }) => {
       promocaodesconto,
       precoliquido1,
     };
+
     axios.patch(`/produto/${id}`, produto).then((response) => {});
 
     setTimeout(() => {
-      axios.patch(`/produtosprecos/${id}`, produtopreco).then((response) => {
+      axios.patch(`/produtosprecos/${id}`, preco).then((response) => {
         onClose();
         navigate("/admin", {
           state: { message: "Produto editado com sucesso!!!", type: "success" },
@@ -116,6 +122,46 @@ const ModalEditarProduto = ({ onClose = () => {}, Children }) => {
         document.location.reload(true);
       });
     }, 1000);
+    
+    delete produtoOriginal.id
+    delete produtoOriginal.created_at
+    delete produtoOriginal.updated_at
+    delete precoOriginal.id
+    delete precoOriginal.created_at
+    delete precoOriginal.updated_at
+
+    const produtoValores = Object.values(produtoOriginal);
+    const produtoEditadoValores = Object.values(produto);
+    const produtoKey = Object.keys(produto);
+
+    const precoValores = Object.values(precoOriginal);
+    const precoEditadoValores = Object.values(preco);
+    const precoKey = Object.keys(preco);
+
+    
+    for (let v =0;v<produtoValores.length;v++){
+      if(produtoValores[v] !== produtoEditadoValores[v]){
+        const log={};
+        log.idUser= localStorage.getItem("idUser");
+        log.idProduto = produtoOriginal.produto1.toString();
+        log.campoAlterado = produtoKey[v].toString();
+        log.valorOriginal = produtoValores[v].toString();
+        log.valorAlterado = produtoEditadoValores[v].toString();
+      
+        axios.post(`/log`, log)
+      }};
+
+      for (let v =0;v<precoValores.length;v++){
+        if(precoValores[v] !== precoEditadoValores[v]){
+          const log={};
+          log.idUser= localStorage.getItem("idUser");
+          log.idProduto = produtoOriginal.produto1.toString();
+          log.campoAlterado = precoKey[v].toString();
+          log.valorOriginal = precoValores[v].toString();
+          log.valorAlterado = precoEditadoValores[v].toString();  
+         
+          axios.post(`/log`, log)        
+        }};    
   };
 
   const [disp, setDisp] = React.useState("");
