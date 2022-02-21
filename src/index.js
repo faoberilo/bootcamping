@@ -10,8 +10,8 @@ import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Produto from "./pages/Produto/Produto";
 
-axios.defaults.baseURL = "https://gcommerce-backend.herokuapp.com/";
-//axios.defaults.baseURL = "http://localhost:3001/";
+//axios.defaults.baseURL = "https://gcommerce-backend.herokuapp.com/";
+axios.defaults.baseURL = "https://bootcamping-backend.herokuapp.com/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.interceptors.request.use((config) => {
   config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
