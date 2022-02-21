@@ -16,7 +16,7 @@ const ExportTable = () => {
   React.useEffect(()=>{
     const getData = async () => {
       await axios
-        .get("log")
+        .get("produto")
         .then((response) => {;               
           setProdutos(response.data);
         })
