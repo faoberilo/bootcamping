@@ -10,6 +10,9 @@ font-size:1.5rem;
             button:active,
             button:visited,
             button:focus {
+                
+                display: flex;
+                align-items: center;
                 font-size:1.5rem;
                 color:black;
                 text-decoration: none;
@@ -20,6 +23,10 @@ font-size:1.5rem;
                     cursor: pointer;
                     transition: all 200ms ease;
                     transform: scale(1.1);
+                }
+                h5{
+                    
+                    font-size:1rem;
                 }
             }
 `

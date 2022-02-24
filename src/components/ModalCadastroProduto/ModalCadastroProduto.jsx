@@ -92,6 +92,15 @@ const ModalCadastroProduto = ({ onClose = () => {}, Children }) => {
           alert(response.message);
         });
     }, 1000);
+
+        const log = {};
+        log.idUser= localStorage.getItem("idUser");
+        log.idProduto = codigo;
+        log.campoAlterado = "Cadastro de produto";
+        log.valorOriginal = "";
+        log.valorAlterado = "";
+      
+        axios.post(`/log`, log);
   };
 
   const inputLabelProps = {

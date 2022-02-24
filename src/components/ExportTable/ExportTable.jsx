@@ -47,7 +47,7 @@ const ExportTable = () => {
   return (
     <div>
       <Detalhe>
-      <Tooltip title="Download Tabela de Logs.xlsx"><button onClick={downloadExcel}><BiCloudDownload/></button></Tooltip>
+      <Tooltip title="Download Tabela de Logs.xlsx"><button onClick={downloadExcel}><BiCloudDownload/><h5>Tabela de Logs</h5></button></Tooltip>
       </Detalhe>      
     </div>             
   )

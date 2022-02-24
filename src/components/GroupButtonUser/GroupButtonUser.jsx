@@ -37,6 +37,13 @@ const GroupButton = (props) => {
       });
       document.location.reload(true);
     });
+    const log = {};
+    log.idUser= localStorage.getItem("idUser");
+    log.idProduto = `Usuário =>${props.id}`;
+    log.campoAlterado = "Exclusão de usuário";
+    log.valorOriginal = "";
+    log.valorAlterado = "";  
+    axios.post(`/log`, log);
         
   };
 

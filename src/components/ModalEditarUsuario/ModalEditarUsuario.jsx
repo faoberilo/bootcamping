@@ -25,8 +25,6 @@ const theme = createTheme({
 });
 const ModalCadastro = ({ onClose = () => {}, Children }) => {
 
-
-
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -45,11 +43,13 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
   const id = localStorage.getItem("idEditar");
 
   const [user, setUser] = useState({});
+  const [userOriginal, setUserOriginal] = useState({});
 
   const getUserById = async () => {
     const request = await axios.get(`/usuario/${id}`);
     const user = request.data
      setUser(user);
+     setUserOriginal(user);
   };
 
   useEffect(() => {
@@ -88,7 +88,26 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
           });
           document.location.reload(true);
         });
-    
+
+    delete userOriginal.id
+    delete userOriginal.created_at
+    delete userOriginal.updated_at    
+
+    const userValores = Object.values(userOriginal);
+    const userEditadoValores = Object.values(user);
+    const userKey = Object.keys(user);
+
+    for (let v =0;v<userValores.length;v++){
+      if(userValores[v] !== userEditadoValores[v]){
+        const log={};
+        log.idUser= localStorage.getItem("idUser");
+        log.idProduto ="Usuario =>"+localStorage.getItem("idEditar");
+        log.campoAlterado = userKey[v].toString();
+        log.valorOriginal = userValores[v].toString();
+        log.valorAlterado = userEditadoValores[v].toString();
+      
+        axios.post(`/log`, log)
+      }};     
   };
 
   const [disp, setDisp] = React.useState("");

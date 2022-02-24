@@ -23,6 +23,8 @@ const GroupButton = (props) => {
   const handleClose = () => setOpen(false);
   const [isModalVisible, setisModalVisible] = React.useState(false);
   const [isModalDetalhesVisible, setisModalDetalhesVisible] = React.useState(false);
+  const [produto, setProduto] = React.useState({});
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,6 +39,16 @@ const GroupButton = (props) => {
     navigate(`/produto/${props.id}`, { state: props.id });
   };
 
+  const getProdutoById = async () => {
+    const request = await axios.get(`/produto/${props.id}`);
+    var produto = request.data;
+    setProduto(produto);
+  };
+
+  React.useEffect(() => {
+    getProdutoById();
+  }, []);
+
   const deletaProduto = () => {
     axios.delete(`/produtosprecos/${props.id}`);
     setTimeout(() => {
@@ -48,6 +60,13 @@ const GroupButton = (props) => {
         handleClose();
       });
     }, 1000);
+    const log = {};
+    log.idUser= localStorage.getItem("idUser");
+    log.idProduto = produto.produto1;
+    log.campoAlterado = "Exclusão de produto";
+    log.valorOriginal = "";
+    log.valorAlterado = "";  
+    axios.post(`/log`, log);
   };
 
   return (

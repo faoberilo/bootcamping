@@ -82,6 +82,14 @@ const ModalCadastro = ({ onClose = () => {}, Children }) => {
       });
       document.location.reload(true);
     }
+    const log = {};
+    log.idUser= localStorage.getItem("idUser");
+    log.idProduto = email;
+    log.campoAlterado = "Cadastro de usuário";
+    log.valorOriginal = "";
+    log.valorAlterado = "";
+  
+    axios.post(`/log`, log);
   };
 
   const [disp, setDisp] = React.useState("");
