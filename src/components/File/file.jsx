@@ -105,6 +105,7 @@ const FileInput= () => {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((response) => {
+        console.log(formData)
         getProdutos();
         setTimeout(()=>{document.location.reload(true);},1000);
         navigate("/admin", {
